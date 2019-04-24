@@ -4,12 +4,14 @@ const toDoSchema = require('./ToDo');
 
 const tripSchema = new Schema({
 
-    title: String,
+    tripName: String,
     fromDest: String,
     toDest: String,
-    travelDepartDate: String,
-    travelReturnDate: String,
+    departDate: String,
+    returnDate: String,
     thingsToDo: [toDoSchema],
+    flightCost: Number,
+    numPeople: Number,
     dateCreated: Date,
     _user: {type: Schema.Types.ObjectId, ref: 'User'}
 });

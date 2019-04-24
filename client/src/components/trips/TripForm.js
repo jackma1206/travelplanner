@@ -10,11 +10,11 @@ class TripForm extends Component {
     render(){
         return(
             <div style={{marginTop: "20px"}}>
-                <form style={{width:"50%", margin:"0 auto"}}>
+                <form onSubmit={this.props.handleSubmit} style={{width:"70%", margin:"0 auto"}}>
                     <div className="row">
                         <div className="col s12">
-                            <label htmlFor="name">Trip Name</label>
-                            <Field component="input" type="text" name="name"/>
+                            <label htmlFor="tripName">Trip Name</label>
+                            <Field component="input" type="text" name="tripName"/>
                         </div>
                         <div className="col s6">
                             <label htmlFor="fromDest">From</label>
@@ -45,7 +45,7 @@ class TripForm extends Component {
                             <Field component="input" name="numPeople" />
                         </div>
                     </div>
-                    
+                        <button className='waves-effect waves-light btn' type="submit" disabled={this.props.submitting}>Submit</button>
                 </form>
             </div>
         );
@@ -53,5 +53,6 @@ class TripForm extends Component {
   
 }
 
-export default reduxForm({form:'tripForm', destroyOnUnmount:false})(TripForm);
+export default reduxForm({  form:'tripForm', 
+                            destroyOnUnmount:false})(TripForm);
 
