@@ -1,28 +1,34 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import renderDatePicker from './renderDatePicker';
 import moment from 'moment';
 
 
-class TripForm extends Component {
+const TripForm = ({handleSubmit, submitting}) => {
 
-   
-    render(){
+    
+        const renderInput = ({input, meta, label}) =>{
+            return(<div >
+                <label>{label}</label>
+                <input {...input} />
+                {meta.error && meta.touched &&
+                    <span style={{color:'red'}}>{meta.error}</span>
+                }
+            </div>
+            );
+        }
         return(
             <div style={{marginTop: "20px"}}>
-                <form onSubmit={this.props.handleSubmit} style={{width:"70%", margin:"0 auto"}}>
+                <form onSubmit={handleSubmit} style={{width:"70%", margin:"0 auto"}}>
                     <div className="row">
                         <div className="col s12">
-                            <label htmlFor="tripName">Trip Name</label>
-                            <Field component="input" type="text" name="tripName"/>
+                            <Field component={renderInput} label="Trip Name" type="text" name="tripName"/>
                         </div>
                         <div className="col s6">
-                            <label htmlFor="fromDest">From</label>
-                            <Field component="input" type="text" name="fromDest"/>
+                            <Field component={renderInput} label="From" type="text" name="fromDest"/>
                         </div>
                         <div className="col s6">
-                            <label htmlFor="toDest">To</label>
-                        <   Field component="input" type="text" name="toDest"/>
+                        <   Field component={renderInput} label="To" type="text" name="toDest"/>
                         </div>
                         <div className="col s3">
                             <label htmlFor="departDate">Depart Date</label>
@@ -37,22 +43,49 @@ class TripForm extends Component {
                                     inputValueFormat="MM-DD-YYYY"/>
                         </div>
                         <div className="col s3">
-                            <label htmlFor="flightCost">Flight Cost</label>
-                            <Field component='input' name="flightCost"/>
+                            <Field component={renderInput} label="Flight Cost" name="flightCost"/>
                         </div>
                         <div className="col s3">
-                            <label>Travelers</label>
-                            <Field component="input" name="numPeople" />
+                            <Field component={renderInput} label="Travelers" name="numPeople" />
                         </div>
                     </div>
-                        <button className='waves-effect waves-light btn' type="submit" disabled={this.props.submitting}>Submit</button>
+                        <button className='waves-effect waves-light btn right' type="submit" disabled={submitting}>Submit</button>
                 </form>
             </div>
         );
     }
   
+
+
+const validate = values =>{
+    const errors = {};
+        if(!values.tripName){
+            errors.tripName = 'Please name your trip';
+        }
+        if(!values.fromDest){
+            errors.fromDest = 'Required';
+        }
+        if(!values.toDest){
+            errors.toDest = 'Required';
+        }
+        if(!values.departDate){
+            errors.departDate = 'required';
+        }
+        if(!values.returnDate){
+            errors.returnDate = 'required';
+        }
+        if(!values.flightCost){
+            errors.flightCost = 'required';
+        }
+        if(!values.numPeople){
+            errors.numPeople = 'required';
+        }
+
+    return errors;
 }
 
 export default reduxForm({  form:'tripForm', 
-                            destroyOnUnmount:false})(TripForm);
+                            destroyOnUnmount:false,
+                            validate
+                        })(TripForm);
 
