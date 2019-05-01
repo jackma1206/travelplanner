@@ -1,10 +1,13 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
 import renderDatePicker from './renderDatePicker';
+import renderDestination from './renderDestination';
 import moment from 'moment';
+import '../../styles/tripForm.scss';
+import {airports} from './airportsList';
 
 
-const TripForm = ({handleSubmit, submitting}) => {
+const TripForm = ({handleSubmit, submitting, value}) => {
 
     
         const renderInput = ({input, meta, label}) =>{
@@ -12,33 +15,31 @@ const TripForm = ({handleSubmit, submitting}) => {
                 <label>{label}</label>
                 <input {...input} />
                 {meta.error && meta.touched &&
-                    <span style={{color:'red'}}>{meta.error}</span>
+                    <span className="form-errors">{meta.error}</span>
                 }
             </div>
             );
         }
         return(
-            <div style={{marginTop: "20px"}}>
-                <form onSubmit={handleSubmit} style={{width:"70%", margin:"0 auto"}}>
+            <div className='formContainer'>
+                <form autoComplete="off" onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col s12">
                             <Field component={renderInput} label="Trip Name" type="text" name="tripName"/>
                         </div>
                         <div className="col s6">
-                            <Field component={renderInput} label="From" type="text" name="fromDest"/>
+                            <Field component={renderDestination} label="From" type="text" name="fromDest" data={airports}/>
                         </div>
                         <div className="col s6">
-                        <   Field component={renderInput} label="To" type="text" name="toDest"/>
+                            <Field component={renderDestination} label="To" type="text" name="toDest" data={airports} value={value}/>
                         </div>
                         <div className="col s3">
-                            <label htmlFor="departDate">Depart Date</label>
-                            <Field component={renderDatePicker} name="departDate" 
+                            <Field component={renderDatePicker} name="departDate" label='Depart Date'
                                     normalize={value => (value ? moment(value).format('MM-DD-YYYY') : null)} 
                                     inputValueFormat="MM-DD-YYYY"/>
                         </div>
                         <div className="col s3 ">
-                            <label htmlFor="returnDate">Return Date</label>
-                            <Field component={renderDatePicker} name="returnDate" 
+                            <Field component={renderDatePicker} name="returnDate" label="Return Date" 
                                     normalize={value => (value ? moment(value).format('MM-DD-YYYY') : null)} 
                                     inputValueFormat="MM-DD-YYYY"/>
                         </div>

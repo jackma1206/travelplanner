@@ -35,7 +35,7 @@ class renderDatePicker extends Component {
         }
     }
 
-    handleChange= (date) => {
+    handleChange = (date) => {
         this.setState({
             selectedDate: date
         });
@@ -46,11 +46,13 @@ class renderDatePicker extends Component {
     render(){
         const {
             meta: {touched, error},
+            label,
             ...rest
         } = this.props;
 
         return(
             <div>
+                <label>{label}</label>
                 <DatePicker 
                     {...rest}
                     selected={this.state.selectedDate}
