@@ -12,41 +12,44 @@
 .inputDiv input:focus {
   border-bottom: 1px solid #26c9ff;
 }
+
 .destinationDropdown {
   position: relative;
   margin-top: 0;
   padding-top: 0;
-
-  .dropdownList {
-    border: 1px #ddd solid;
-    z-index: 1;
-    position: absolute;
-    background: white;
-    top: 0;
-    left: 0;
-    border-top-width: 0;
-    border-bottom-color: #ccc;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    color: black;
-    padding-top: 0;
-    margin-top: 0;
-
-    .dropdownListItem {
-      padding: 12px 15px;
-      border-bottom: solid 1px #eee;
-      cursor: pointer;
-
-      &:last-child {
-        border-bottom-width: 0;
-      }
-
-      &:hover {
-        color: white;
-        background: #26c9ff;
-      }
-    }
-  }
 }
+
+.destinationDropdown .dropdownList {
+  border: 1px #ddd solid;
+  z-index: 1;
+  position: absolute;
+  background: white;
+  top: 0;
+  left: 0;
+  border-top-width: 0;
+  border-bottom-color: #ccc;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: black;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.destinationDropdown .dropdownList .dropdownListItem {
+  padding: 12px 15px;
+  border-bottom: solid 1px #eee;
+  cursor: pointer;
+}
+
+.destinationDropdown .dropdownList .dropdownListItem:last-child {
+  border-bottom-width: 0;
+}
+
+.destinationDropdown .dropdownList .dropdownListItem:hover {
+  color: white;
+  background: #26c9ff;
+}
+
 .input-field input[type="text"]:focus + label {
   color: #2196f3 !important;
 }
@@ -67,7 +70,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-bottom: 1px solid #26c9ff;
   -webkit-box-shadow: 0 1px 0 0 #26c9ff;
   box-shadow: 0 1px 0 0 #26c9ff;
-
 }
 
 input:not([type]):focus:not([readonly]) + label,
@@ -84,13 +86,9 @@ input[type=number]:not(.browser-default):focus:not([readonly]) + label,
 input[type=search]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label {
   color: black;
-  
 }
 
-.datepicker-div{
-  
-
-  label{
-    display: block;
-  }
+.datepicker-div label {
+  display: block;
 }
+/*# sourceMappingURL=tripForm.css.map */

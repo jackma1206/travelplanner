@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Fuse from "fuse.js";
+import M from 'materialize-css';
+
 
 class renderDestination extends Component {
   static propTypes = {
@@ -38,6 +40,7 @@ class renderDestination extends Component {
       ]
     };
     this.fuse = new Fuse(this.props.data, options);
+    M.AutoInit();
   }
 
   componentDidMount() {
@@ -45,14 +48,15 @@ class renderDestination extends Component {
     const matchedAirport = this.fuse.search(value).slice(0, 6);
 
     this.setState({
-      value: value,
+      value: value.trim(),
       matchedAirport,
-      showDropdown: !!value
+      showDropdown: !!value.trim()
     });
   }
 
   handleChange = e => {
     const { value } = e.target;
+
     const matchedAirport = this.fuse.search(value).slice(0, 6);
     this.setState({
       value: value.trim(),
@@ -97,17 +101,21 @@ class renderDestination extends Component {
   };
 
   render() {
-    const { label, ...rest } = this.props;
+    const { label, meta, input,...rest } = this.props;
     console.log(this.props);
     return (
-      <div>
+      <div className="input-field">
         <label>{label}</label>
         <input
+          {...input}
           onChange={this.handleChange}
           value={this.state.value}
           selected={this.state.value}
           {...rest}
         />
+        {meta.error && meta.touched && (
+                      <span className="form-errors">{meta.error}</span>
+                    )}
         {this.renderDropdown()}
       </div>
     );

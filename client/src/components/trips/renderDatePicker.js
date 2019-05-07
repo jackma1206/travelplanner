@@ -27,6 +27,7 @@ class renderDatePicker extends Component {
         selectedDate: null,
     }
 
+   
     componentWillMount(){
         if(this.props.input.value){
             this.setState({
@@ -34,6 +35,7 @@ class renderDatePicker extends Component {
             });
         }
     }
+
 
     handleChange = (date) => {
         this.setState({
@@ -47,20 +49,24 @@ class renderDatePicker extends Component {
         const {
             meta: {touched, error},
             label,
+            input,
             ...rest
         } = this.props;
 
         return(
-            <div>
-                <label>{label}</label>
+            <div className="datepicker-div">
+            <label>{label}</label>
                 <DatePicker 
-                    {...rest}
+                    
                     selected={this.state.selectedDate}
                     onChange={this.handleChange}
+                    
+                    {...rest}
                 />
-                {touched && error && 
-                    <span className="datepicker_error">{error}</span>
-                }
+                
+                {error && touched && (
+                      <span className="form-errors" style={{display:'block'}}>{error}</span>
+                )}
             </div>
         )
     }
