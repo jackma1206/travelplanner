@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import renderDatePicker from "./renderDatePicker";
 import renderDestination from "./renderDestination";
 import moment from "moment";
-import "../../styles/tripForm.scss";
+
 import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
@@ -20,6 +20,8 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
               name="tripName"
             />
           </div>
+        </div>
+        <div className="row">
           <div className="col s6">
             <Field
               component={renderDestination}
@@ -29,6 +31,7 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
               data={airports}
             />
           </div>
+
           <div className="col s6">
             <Field
               component={renderDestination}
@@ -38,6 +41,8 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
               data={airports}
             />
           </div>
+        </div>
+        <div className="row">
           <div className="col s3">
             <Field
               component={renderDatePicker}
@@ -49,6 +54,7 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
               inputValueFormat="MM-DD-YYYY"
             />
           </div>
+
           <div className="col s3 ">
             <Field
               component={renderDatePicker}
@@ -58,8 +64,9 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
                 value ? moment(value).format("MM-DD-YYYY") : null
               }
               inputValueFormat="MM-DD-YYYY"
-              />
+            />
           </div>
+
           <div className="col s3">
             <Field
               component={renderInput}
@@ -68,12 +75,19 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
               type="text"
             />
           </div>
+
           <div className="col s3">
-            <Field component={renderInput} type="text" label="Travelers" name="numPeople" />
+            <Field
+              component={renderInput}
+              type="text"
+              label="Travelers"
+              name="numPeople"
+            />
           </div>
         </div>
+
         <button
-          className="waves-effect waves-light btn right"
+          className="waves-effect waves-light btn right submit-button"
           type="submit"
           disabled={submitting}
         >
@@ -109,9 +123,9 @@ const validate = values => {
   }
   let d1 = Date.parse(values.departDate);
   let d2 = Date.parse(values.returnDate);
-  if(d1 > d2){
-      errors.departDate = "Travel dates invalid";
-      errors.returnDate = "Travel dates invalid"
+  if (d1 > d2) {
+    errors.departDate = "Travel dates invalid";
+    errors.returnDate = "Travel dates invalid";
   }
 
   return errors;

@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Fuse from "fuse.js";
-import M from 'materialize-css';
-
+import M from "materialize-css";
 
 class renderDestination extends Component {
   static propTypes = {
@@ -66,7 +65,6 @@ class renderDestination extends Component {
   };
 
   handleDropdownClick = airport => {
-    console.log(airport);
     const { city, country, iata, name } = airport;
     const value = `${city} - ${iata}`;
     this.setState({
@@ -92,6 +90,9 @@ class renderDestination extends Component {
                 onClick={() => this.handleDropdownClick(airport)}
               >
                 {airport.iata} - {airport.name}
+                <div className="airportLocation">
+                  {airport.city}, {airport.country}
+                </div>
               </li>
             );
           })}
@@ -101,8 +102,7 @@ class renderDestination extends Component {
   };
 
   render() {
-    const { label, meta, input,...rest } = this.props;
-    console.log(this.props);
+    const { label, meta, input, ...rest } = this.props;
     return (
       <div className="input-field">
         <label>{label}</label>
@@ -114,8 +114,8 @@ class renderDestination extends Component {
           {...rest}
         />
         {meta.error && meta.touched && (
-                      <span className="form-errors">{meta.error}</span>
-                    )}
+          <span className="form-errors">{meta.error}</span>
+        )}
         {this.renderDropdown()}
       </div>
     );
