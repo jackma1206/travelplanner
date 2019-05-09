@@ -1,0 +1,49 @@
+$blue-grey: #455a64;
+$blue-grey-lighten: #78909c;
+$nav-color: #26a69a;
+$red: #d32f2f;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  position: fixed;
+  width: 180px;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  background-color: $blue-grey;
+  color: white;
+
+  ul {
+    margin-top: 10px;
+    height: 100%;
+
+    li {
+      padding-top: 12px;
+      padding-left: 20px;
+      padding-bottom: 12px;
+      cursor: pointer;
+      width: 100%;
+
+      &:hover {
+        background-color: $blue-grey-lighten;
+        border-left: 2px solid $nav-color;
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      span {
+        padding-right: 10px;
+      }
+    }
+  }
+}
+.logout-dash {
+  &:hover {
+    border-left: 2px solid $red !important;
+  }
+}

@@ -24,8 +24,13 @@ class TripsNew extends Component {
 
   render() {
     return (
-      <div className="container">
-        <button onClick={this.handleModalOpen}>Add</button>
+      <div>
+        <li className="waves-effect" onClick={this.handleModalOpen}>
+          <span className="dash-icon">
+            <i class="fas fa-plus-circle" />
+          </span>
+          Add Trip
+        </li>
         <ReactModal
           isOpen={this.state.showModal}
           closeTimeoutMS={600}
@@ -39,7 +44,9 @@ class TripsNew extends Component {
         >
           <div className="modal-header">
             <h3>Add a new trip</h3>
-            <span onClick={this.handleModalClose}>X</span>
+            <span onClick={this.handleModalClose}>
+              <i className="fa fa-times" />
+            </span>
           </div>
 
           <TripForm onSubmit={values => this.props.submitTrip(values)} />

@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  position: fixed;
+  width: 180px;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  background-color: #455a64;
+  color: white;
+}
+
+.sidebar ul {
+  margin-top: 10px;
+  height: 100%;
+}
+
+.sidebar ul li {
+  padding-top: 12px;
+  padding-left: 20px;
+  padding-bottom: 12px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.sidebar ul li:hover {
+  background-color: #78909c;
+  border-left: 2px solid #26a69a;
+}
+
+.sidebar ul li a {
+  text-decoration: none;
+  color: white;
+}
+
+.sidebar ul li span {
+  padding-right: 10px;
+}
+
+.logout-dash:hover {
+  border-left: 2px solid #d32f2f !important;
+}
+/*# sourceMappingURL=dashboard.css.map */
