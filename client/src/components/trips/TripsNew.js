@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "../../actions";
 import ReactModal from "react-modal";
 import "../../styles/tripForm.scss";
+import { withRouter } from "react-router";
 
 class TripsNew extends Component {
   constructor(props) {
@@ -18,22 +19,31 @@ class TripsNew extends Component {
     this.setState({ showModal: true });
   };
 
-  handleModalClose = () => {
+  handleModalClose = e => {
+    e.stopPropagation();
+    this.setState({ showModal: false });
+  };
+
+  closeAfterSubmit = () => {
     this.setState({ showModal: false });
   };
 
   render() {
+    const { history } = this.props;
     return (
       <div>
         <li className="waves-effect" onClick={this.handleModalOpen}>
           <span className="dash-icon">
-            <i class="fas fa-plus-circle" />
+            <a href="#">
+              <i class="fas fa-plus-circle" /> Add Trip
+            </a>
           </span>
-          Add Trip
         </li>
         <ReactModal
           isOpen={this.state.showModal}
           closeTimeoutMS={600}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={this.handleModalClose}
           contentLabel="New Trip Form"
           className="myModal"
           style={{
@@ -49,7 +59,10 @@ class TripsNew extends Component {
             </span>
           </div>
 
-          <TripForm onSubmit={values => this.props.submitTrip(values)} />
+          <TripForm
+            onSubmit={values => this.props.submitTrip(values, history)}
+            closeAfterSubmit={this.closeAfterSubmit}
+          />
         </ReactModal>
       </div>
     );
@@ -59,5 +72,5 @@ class TripsNew extends Component {
 TripsNew = connect(
   null,
   actions
-)(TripsNew);
+)(withRouter(TripsNew));
 export default reduxForm({ form: "tripForm" })(TripsNew);

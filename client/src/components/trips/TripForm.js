@@ -7,7 +7,21 @@ import moment from "moment";
 import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
-const TripForm = ({ handleSubmit, submitting, value }) => {
+const TripForm = props => {
+  const {
+    handleSubmit,
+    submitting,
+    value,
+    closeAfterSubmit,
+    pristine,
+    valid
+  } = props;
+
+  const checkValid = () => {
+    if (valid) {
+      closeAfterSubmit();
+    }
+  };
   return (
     <div className="formContainer">
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -89,7 +103,12 @@ const TripForm = ({ handleSubmit, submitting, value }) => {
         <button
           className="waves-effect waves-light btn right submit-button"
           type="submit"
-          disabled={submitting}
+          disabled={pristine || submitting}
+          onClick={() => {
+            if (valid) {
+              closeAfterSubmit();
+            }
+          }}
         >
           Submit
         </button>
@@ -117,13 +136,18 @@ const validate = values => {
   }
   if (!values.flightCost) {
     errors.flightCost = "Required";
+  } else if (isNaN(values.flightCost)) {
+    errors.flightCost = "Please use a number";
   }
   if (!values.numPeople) {
     errors.numPeople = "Required";
+  } else if (isNaN(values.numPeople)) {
+    errors.numPeople = "Please use a number";
   }
+  let dNow = new Date();
   let d1 = Date.parse(values.departDate);
   let d2 = Date.parse(values.returnDate);
-  if (d1 > d2) {
+  if (d1 > d2 || dNow > d1) {
     errors.departDate = "Travel dates invalid";
     errors.returnDate = "Travel dates invalid";
   }

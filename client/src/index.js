@@ -10,7 +10,8 @@ import App from "./components/App";
 import reducers from "./reducers";
 
 import axios from "axios";
-window.axios = axios;
+import ReactModal from "react-modal";
+ReactModal.setAppElement("#root");
 
 const store = createStore(
   reducers,

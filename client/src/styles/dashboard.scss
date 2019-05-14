@@ -1,7 +1,5 @@
-$blue-grey: #455a64;
-$blue-grey-lighten: #78909c;
-$nav-color: #26a69a;
-$red: #d32f2f;
+@import "colors";
+
 * {
   margin: 0;
   padding: 0;
@@ -11,19 +9,19 @@ $red: #d32f2f;
   position: fixed;
   width: 180px;
   left: 0;
-  top: 64px;
+  top: 56px;
   bottom: 0;
   background-color: $blue-grey;
   color: white;
 
+  @media only screen and (min-width: $break-point) {
+    top: 64px;
+  }
   ul {
     margin-top: 10px;
     height: 100%;
 
     li {
-      padding-top: 12px;
-      padding-left: 20px;
-      padding-bottom: 12px;
       cursor: pointer;
       width: 100%;
 
@@ -32,12 +30,18 @@ $red: #d32f2f;
         border-left: 2px solid $nav-color;
       }
 
-      a {
-        text-decoration: none;
-        color: white;
-      }
       span {
-        padding-right: 10px;
+        a {
+          text-decoration: none;
+          color: white;
+          display: block;
+          // border: 1px solid black;
+          padding: 14px 12px;
+
+          i {
+            padding-right: 10px;
+          }
+        }
       }
     }
   }
@@ -46,4 +50,8 @@ $red: #d32f2f;
   &:hover {
     border-left: 2px solid $red !important;
   }
+}
+
+.dashboard {
+  margin-left: 180px;
 }

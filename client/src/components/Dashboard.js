@@ -9,33 +9,39 @@ class Dashboard extends Component {
           <ul>
             <li className="waves-effect">
               <span className="dash-icon">
-                <i class="far fa-list-alt" />
+                <a href="#">
+                  <i class="far fa-list-alt" /> Dashboard
+                </a>
               </span>
-              Dashboard
             </li>
             <li className="waves-effect">
               <span className="dash-icon">
-                <i class="fas fa-plane" />
+                <a href="#">
+                  <i class="fas fa-plane" /> My Trips
+                </a>
               </span>
-              My Trips
             </li>
             <li className="waves-effect">
               <span className="dash-icon">
-                <i class="far fa-save" />
+                <a href="#">
+                  <i class="far fa-save" /> Saved Trips
+                </a>
               </span>
-              Saved Trips
             </li>
             <TripsNew />
             <li className="waves-effect logout-dash">
               <span className="dash-icon">
-                <i class="fas fa-sign-out-alt" />
+                <a href="/api/logout">
+                  <i class="fas fa-sign-out-alt" /> Logout
+                </a>
               </span>
-              <a href="/api/logout">Logout</a>
             </li>
           </ul>
         </div>
-        <div className="container">
-          <h1>Dashboard</h1>
+        <div className="dashboard">
+          <div className="container">
+            <h1>Dashboard</h1>
+          </div>
         </div>
       </div>
     );

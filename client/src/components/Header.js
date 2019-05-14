@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Dropdown, Divider, Button } from "react-materialize";
+import "../styles/header.scss";
 
 class Header extends Component {
   renderContent() {
+    console.log(this.props);
     switch (this.props.auth) {
       case null:
         return;
@@ -14,22 +17,39 @@ class Header extends Component {
           </li>
         );
       default:
-        return [
-          <li key="2">{this.props.auth.name}</li>,
-          <li key="1">
-            <a href="/api/logout">Logout</a>
-          </li>
-        ];
+        return this.renderDropdown();
     }
   }
+
+  renderDropdown() {
+    const trigger = (
+      <button className="btn dropdown-btn">
+        <img
+          className="profile-pic"
+          src={this.props.auth.picture}
+          alt="profile picture"
+        />
+        <span>
+          {this.props.auth.name} <i class="fas fa-bars" />
+        </span>
+      </button>
+    );
+    const options = { coverTrigger: false };
+    return (
+      <Dropdown trigger={trigger} options={options}>
+        <a href="/trips">Dashboard</a>
+        <a href="#">Preferences</a>
+        <Divider />
+        <a href="/api/logout">Logout</a>
+      </Dropdown>
+    );
+  }
+
   render() {
     return (
       <nav className="teal lighten-1">
         <div className="nav-wrapper container">
-          <Link
-            to={this.props.auth ? "/trips" : "/"}
-            className="left brand-logo"
-          >
+          <Link to={this.props.auth ? "/" : "/"} className="left brand-logo">
             TravelPal
           </Link>
           <ul className="right">{this.renderContent()}</ul>
