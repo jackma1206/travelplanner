@@ -8,20 +8,8 @@ import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
 const TripForm = props => {
-  const {
-    handleSubmit,
-    submitting,
-    value,
-    closeAfterSubmit,
-    pristine,
-    valid
-  } = props;
+  const { handleSubmit, submitting, closeAfterSubmit, pristine, valid } = props;
 
-  const checkValid = () => {
-    if (valid) {
-      closeAfterSubmit();
-    }
-  };
   return (
     <div className="formContainer">
       <form autoComplete="off" onSubmit={handleSubmit}>

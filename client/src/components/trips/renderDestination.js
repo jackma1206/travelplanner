@@ -30,11 +30,11 @@ class renderDestination extends Component {
         },
         {
           name: "name",
-          weight: 0.3
+          weight: 0.2
         },
         {
           name: "city",
-          weight: 0.2
+          weight: 0.4
         }
       ]
     };
@@ -47,7 +47,7 @@ class renderDestination extends Component {
     const matchedAirport = this.fuse.search(value).slice(0, 6);
 
     this.setState({
-      value: value.trim(),
+      value: value,
       matchedAirport,
       showDropdown: !!value.trim()
     });
@@ -58,15 +58,15 @@ class renderDestination extends Component {
 
     const matchedAirport = this.fuse.search(value).slice(0, 6);
     this.setState({
-      value: value.trim(),
+      value: value,
       matchedAirport,
       showDropdown: true
     });
   };
 
   handleDropdownClick = airport => {
-    const { city, country, iata, name } = airport;
-    const value = `${city} - ${iata}`;
+    const { city, iata, country } = airport;
+    const value = `${iata} - ${city} - ${country}`;
     this.setState({
       value,
       showDropdown: false

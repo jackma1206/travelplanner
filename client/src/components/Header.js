@@ -6,7 +6,6 @@ import "../styles/header.scss";
 
 class Header extends Component {
   renderContent() {
-    console.log(this.props);
     switch (this.props.auth) {
       case null:
         return;
@@ -23,21 +22,21 @@ class Header extends Component {
 
   renderDropdown() {
     const trigger = (
-      <button className="btn dropdown-btn">
+      <Button className="btn dropdown-btn">
         <img
           className="profile-pic"
           src={this.props.auth.picture}
-          alt="profile picture"
+          alt="profile"
         />
         <span>
-          {this.props.auth.name} <i class="fas fa-bars" />
+          {this.props.auth.name} <i className="fas fa-bars" />
         </span>
-      </button>
+      </Button>
     );
     const options = { coverTrigger: false };
     return (
       <Dropdown trigger={trigger} options={options}>
-        <a href="/trips">Dashboard</a>
+        <a href="/dashboard">Dashboard</a>
         <a href="#">Preferences</a>
         <Divider />
         <a href="/api/logout">Logout</a>

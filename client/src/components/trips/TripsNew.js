@@ -35,7 +35,7 @@ class TripsNew extends Component {
         <li className="waves-effect" onClick={this.handleModalOpen}>
           <span className="dash-icon">
             <a href="#">
-              <i class="fas fa-plus-circle" /> Add Trip
+              <i className="fas fa-plus-circle" /> Add Trip
             </a>
           </span>
         </li>
