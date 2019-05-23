@@ -35,6 +35,8 @@ class renderDatePicker extends Component {
         )
       });
     }
+    console.log("from datepicker");
+    // console.log(this.props);
   }
 
   handleChange = date => {
@@ -53,11 +55,15 @@ class renderDatePicker extends Component {
       ...rest
     } = this.props;
 
+    const selected = this.props.input.value
+      ? moment(this.props.input.value).toDate()
+      : null;
+
     return (
       <div className="">
         <label>{label}</label>
         <DatePicker
-          selected={this.state.selectedDate}
+          selected={selected}
           onChange={this.handleChange}
           {...rest}
         />

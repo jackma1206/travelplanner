@@ -65,8 +65,8 @@ class renderDestination extends Component {
   };
 
   handleDropdownClick = airport => {
-    const { city, iata, country } = airport;
-    const value = `${iata} - ${city} - ${country}`;
+    const { city, iata, country, name } = airport;
+    const value = `${iata} - ${name} - ${city} - ${country}`;
     this.setState({
       value,
       showDropdown: false

@@ -15,7 +15,7 @@ class Dashboard extends Component {
       activeTab: 0
     };
   }
-  componentDidMount() {
+  componentWillMount() {
     this.props.getTrips();
   }
 
@@ -28,9 +28,8 @@ class Dashboard extends Component {
   renderTrips() {
     return this.props.trips.reverse().map((trip, i) => {
       let href = `/dashboard/trips/${trip._id}`;
-
       return (
-        <CollapsibleItem className="coll-item" header={trip.tripName}>
+        <CollapsibleItem key={i} className="coll-item" header={trip.tripName}>
           <TripDetail data={trip} href={href} />
         </CollapsibleItem>
       );

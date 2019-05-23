@@ -2,9 +2,14 @@ const mongoose = require("mongoose");
 const Trip = mongoose.model("trips");
 
 module.exports = app => {
+  app.get("/api/trips/:id", async (req, res) => {
+    let id = req.params.id;
+    const trip = await Trip.findById(id);
+    res.send(trip);
+  });
+
   app.get("/api/trips", async (req, res) => {
-    console.log(req.user.id);
-    const id = req.user.id;
+    let id = req.user.id;
     const trips = await Trip.find({ _user: id });
 
     res.send(trips);
@@ -27,14 +32,16 @@ module.exports = app => {
     const trip = new Trip({
       tripName,
       fromDest: {
-        city: fromD[1],
-        country: fromD[2],
-        code: fromD[0]
+        city: fromD[2],
+        country: fromD[3],
+        code: fromD[0],
+        name: fromD[1]
       },
       toDest: {
-        city: toD[1],
-        country: toD[2],
-        code: toD[0]
+        city: toD[2],
+        country: toD[3],
+        code: toD[0],
+        name: toD[1]
       },
       departDate,
       returnDate,

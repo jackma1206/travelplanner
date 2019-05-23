@@ -51,13 +51,13 @@ const tripDetail = props => {
           </div>
           <div className="col s4 right-align icons">
             <a href="#" className="btn-small">
-              <i class="fas fa-eye" />
+              <i className="fas fa-eye" />
+            </a>
+            <a href={props.href} className="btn-small">
+              <i className="far fa-edit" />
             </a>
             <a href="#" className="btn-small">
-              <i class="far fa-edit" />
-            </a>
-            <a href="#" className="btn-small">
-              <i class="far fa-trash-alt" />
+              <i className="far fa-trash-alt" />
             </a>
           </div>
         </div>

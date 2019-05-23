@@ -7,12 +7,14 @@ const tripSchema = new Schema({
   fromDest: {
     city: String,
     country: String,
-    code: String
+    code: String,
+    name: String
   },
   toDest: {
     city: String,
     country: String,
-    code: String
+    code: String,
+    name: String
   },
   departDate: String,
   returnDate: String,
