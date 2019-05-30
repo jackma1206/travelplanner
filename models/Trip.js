@@ -4,13 +4,15 @@ const toDoSchema = require("./ToDo");
 
 const tripSchema = new Schema({
   tripName: String,
-  fromDest: {
+  fromDest: String,
+  toDest: String,
+  toDe: {
     city: String,
     country: String,
     code: String,
     name: String
   },
-  toDest: {
+  fromDe: {
     city: String,
     country: String,
     code: String,

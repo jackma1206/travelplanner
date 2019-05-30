@@ -1,110 +1,121 @@
-import React from "react";
+import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
 import renderDatePicker from "./renderDatePicker";
 import renderDestination from "./renderDestination";
 import moment from "moment";
-
+import "../../styles/tripForm.scss";
 import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
-const TripEditForm = props => {
-  const { handleSubmit, submitting, closeAfterSubmit, pristine, valid } = props;
+class TripEditForm extends Component {
+  //Create new field to search locations based on name
 
-  return (
-    <div className="formContainer">
-      <form autoComplete="off" onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col s12">
-            <Field
-              component={renderInput}
-              label="Trip Name"
-              type="text"
-              name="tripName"
-            />
+  //combine places autocomplete with geocoding????
+
+  //push it to db as they add locations with price?
+
+  //show their newly added location with every push
+
+  //show map on detail page
+  render() {
+    const { handleSubmit, submitting, pristine } = this.props;
+
+    return (
+      <div className="formContainer-edit">
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div className="row">
+            <div className="col s12">
+              <Field
+                component={renderInput}
+                label="Trip Name"
+                type="text"
+                name="tripName"
+              />
+            </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col s6">
-            <Field
-              component={renderDestination}
-              label="From"
-              type="text"
-              name="fromDest"
-              data={airports}
-            />
+          <div className="row">
+            <div className="col s6">
+              <Field
+                component={renderDestination}
+                label="From"
+                type="text"
+                name="fromDest"
+                data={airports}
+              />
+            </div>
+
+            <div className="col s6">
+              <Field
+                component={renderDestination}
+                label="To"
+                type="text"
+                name="toDest"
+                data={airports}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s3">
+              <Field
+                component={renderDatePicker}
+                name="departDate"
+                label="Depart Date"
+                normalize={value =>
+                  value ? moment(value).format("MM-DD-YYYY") : null
+                }
+                inputValueFormat="MM-DD-YYYY"
+              />
+            </div>
+
+            <div className="col s3 ">
+              <Field
+                component={renderDatePicker}
+                name="returnDate"
+                label="Return Date"
+                normalize={value =>
+                  value ? moment(value).format("MM-DD-YYYY") : null
+                }
+                inputValueFormat="MM-DD-YYYY"
+              />
+            </div>
+
+            <div className="col s3">
+              <Field
+                component={renderInput}
+                label="Flight Cost"
+                name="flightCost"
+                type="text"
+              />
+            </div>
+
+            <div className="col s3">
+              <Field
+                component={renderInput}
+                type="text"
+                label="Travelers"
+                name="numPeople"
+              />
+            </div>
           </div>
 
-          <div className="col s6">
-            <Field
-              component={renderDestination}
-              label="To"
-              type="text"
-              name="toDest"
-              data={airports}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col s3">
-            <Field
-              component={renderDatePicker}
-              name="departDate"
-              label="Depart Date"
-              normalize={value =>
-                value ? moment(value).format("MM-DD-YYYY") : null
-              }
-              inputValueFormat="MM-DD-YYYY"
-            />
-          </div>
-
-          <div className="col s3 ">
-            <Field
-              component={renderDatePicker}
-              name="returnDate"
-              label="Return Date"
-              normalize={value =>
-                value ? moment(value).format("MM-DD-YYYY") : null
-              }
-              inputValueFormat="MM-DD-YYYY"
-            />
-          </div>
-
-          <div className="col s3">
-            <Field
-              component={renderInput}
-              label="Flight Cost"
-              name="flightCost"
-              type="text"
-            />
-          </div>
-
-          <div className="col s3">
-            <Field
-              component={renderInput}
-              type="text"
-              label="Travelers"
-              name="numPeople"
-            />
-          </div>
-        </div>
-
-        <button
-          className="waves-effect waves-light btn right submit-button"
-          type="submit"
-          disabled={pristine || submitting}
-          onClick={() => {
-            if (valid) {
-              closeAfterSubmit();
-            }
-          }}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  );
-};
-
+          <button
+            className="waves-effect waves-light btn right"
+            onClick={this.props.toggleEdit}
+          >
+            Cancel
+          </button>
+          <button
+            className="waves-effect waves-light btn right submit-button"
+            type="submit"
+            disabled={pristine || submitting}
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    );
+  }
+}
 const validate = values => {
   const errors = {};
   if (!values.tripName) {

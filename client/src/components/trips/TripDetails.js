@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import TripEditForm from "./TripEditForm";
+import TripDeets from "./tripDeets";
 
 class TripEdit extends Component {
   // TODO
@@ -14,19 +15,31 @@ class TripEdit extends Component {
     super(props);
 
     this.state = {
-      initValues: {}
+      edit: false
     };
   }
 
-  componentWillMount() {
+  toggleEdit = () => {
+    this.setState({ edit: !this.state.edit });
+  };
+
+  componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchTrip(id);
   }
-
+  //on click of button switch to edit form instead of viewing details
+  //below that is itinerary show map +
   render() {
     return (
       <div className="container">
-        <TripEditForm initialValues={this.props.trip} />
+        {this.state.edit ? (
+          <TripEditForm
+            initialValues={this.props.trip}
+            toggleEdit={this.toggleEdit}
+          />
+        ) : (
+          <TripDeets data={this.props.trip} toggleEdit={this.toggleEdit} />
+        )}
         <div>Lol</div>
       </div>
     );

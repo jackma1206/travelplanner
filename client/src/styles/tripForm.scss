@@ -1,15 +1,22 @@
+@import "colors";
 * {
   margin: 0;
   padding: 0;
 }
-.formContainer {
+.formContainer,
+.formContainer-edit {
   padding: 15px 20px;
   margin: 0 auto;
 }
 
+.formContainer-edit {
+  margin-top: 20px;
+  height: 325px;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 .form-errors {
   color: red;
-
   font-size: 0.8rem;
 }
 
@@ -58,6 +65,10 @@
 }
 .submit-button {
   margin-bottom: 15px;
+}
+
+.datepicker-label {
+  display: block;
 }
 // .input-field input[type="text"]:focus + label {
 //   color: #2196f3 !important;
@@ -113,12 +124,6 @@ input[type="number"]:not(.browser-default),
 input[type="search"]:not(.browser-default),
 textarea.materialize-textarea {
   margin-bottom: 0px;
-}
-
-.datepicker-div {
-  label {
-    display: block;
-  }
 }
 
 // MODAL TRANSITION

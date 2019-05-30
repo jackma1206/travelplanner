@@ -5,6 +5,7 @@ module.exports = app => {
   app.get("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
     const trip = await Trip.findById(id);
+
     res.send(trip);
   });
 
@@ -31,17 +32,19 @@ module.exports = app => {
 
     const trip = new Trip({
       tripName,
-      fromDest: {
-        city: fromD[2],
-        country: fromD[3],
-        code: fromD[0],
-        name: fromD[1]
-      },
-      toDest: {
+      fromDest,
+      toDest,
+      toDe: {
         city: toD[2],
         country: toD[3],
         code: toD[0],
         name: toD[1]
+      },
+      fromDe: {
+        city: fromD[2],
+        country: fromD[3],
+        code: fromD[0],
+        name: fromD[1]
       },
       departDate,
       returnDate,

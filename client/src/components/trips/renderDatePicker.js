@@ -35,8 +35,6 @@ class renderDatePicker extends Component {
         )
       });
     }
-    console.log("from datepicker");
-    // console.log(this.props);
   }
 
   handleChange = date => {
@@ -61,7 +59,7 @@ class renderDatePicker extends Component {
 
     return (
       <div className="">
-        <label>{label}</label>
+        <label className="datepicker-label">{label}</label>
         <DatePicker
           selected={selected}
           onChange={this.handleChange}

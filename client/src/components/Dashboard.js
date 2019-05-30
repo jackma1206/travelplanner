@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "../styles/dashboard.scss";
 import Sidebar from "./sidebar/sidebar";
 import * as actions from "../actions";
-import TripDetail from "./dash/tripDetail";
+import RenderTrip from "./dash/renderTrips";
 
 // import M from "materialize-css";
 import { Collapsible, CollapsibleItem } from "react-materialize";
@@ -15,7 +15,7 @@ class Dashboard extends Component {
       activeTab: 0
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.getTrips();
   }
 
@@ -30,7 +30,7 @@ class Dashboard extends Component {
       let href = `/dashboard/trips/${trip._id}`;
       return (
         <CollapsibleItem key={i} className="coll-item" header={trip.tripName}>
-          <TripDetail data={trip} href={href} />
+          <RenderTrip data={trip} href={href} />
         </CollapsibleItem>
       );
     });

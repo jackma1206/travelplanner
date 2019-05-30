@@ -14,10 +14,7 @@ class renderDestination extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      value: "",
-      matchedAirport: []
-    };
+
     const options = {
       shouldSort: true,
       threshold: 0.4,
@@ -40,19 +37,30 @@ class renderDestination extends Component {
     };
     this.fuse = new Fuse(this.props.data, options);
     M.AutoInit();
+
+    this.state = {
+      value: "",
+      matchedAirport: []
+    };
   }
 
   componentDidMount() {
-    const { value } = this.state;
-    const matchedAirport = this.fuse.search(value).slice(0, 6);
+    // const value = this.state.value;
+    // const matchedAirport = this.fuse.search(value).slice(0, 6);
+    // this.setState({
+    //   value: value,
+    //   matchedAirport,
+    //   showDropdown: !!value.trim()
+    // });
 
-    this.setState({
-      value: value,
-      matchedAirport,
-      showDropdown: !!value.trim()
-    });
+    if (this.props.input.value) {
+      this.setState({
+        value: this.props.input.value
+      });
+    }
   }
 
+  componentWillUpdate() {}
   handleChange = e => {
     const { value } = e.target;
 
@@ -62,6 +70,7 @@ class renderDestination extends Component {
       matchedAirport,
       showDropdown: true
     });
+    this.props.input.onChange(value);
   };
 
   handleDropdownClick = airport => {
@@ -103,14 +112,18 @@ class renderDestination extends Component {
 
   render() {
     const { label, meta, input, ...rest } = this.props;
+    const selected = this.props.input.value
+      ? this.props.input.value
+      : this.state.value;
+
     return (
-      <div className="input-field">
+      <div>
         <label>{label}</label>
         <input
           {...input}
           onChange={this.handleChange}
-          value={this.state.value}
-          selected={this.state.value}
+          value={selected}
+          // selected={this.state.value}
           {...rest}
         />
         {meta.error && meta.touched && (

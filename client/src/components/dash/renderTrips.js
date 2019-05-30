@@ -1,11 +1,29 @@
 import React from "react";
 
 const tripDetail = props => {
-  let fCode = props.data.fromDest.code;
-  let fCity = `${props.data.fromDest.city}, ${props.data.fromDest.country}`;
+  let fCode = props.data.fromDe.code;
+  let fCity = `${props.data.fromDe.city}, ${props.data.fromDe.country}`;
 
-  let toCode = props.data.toDest.code;
-  let toCity = `${props.data.toDest.city}, ${props.data.toDest.country}`;
+  let toCode = props.data.toDe.code;
+  let toCity = `${props.data.toDe.city}, ${props.data.toDe.country}`;
+
+  const renderButtons = () => {
+    if (window.location.pathname === "/dashboard") {
+      return (
+        <div className="col s4 right-align icons">
+          <a href="#" className="btn-small">
+            <i className="fas fa-eye" />
+          </a>
+          <a href={props.href} className="btn-small">
+            <i className="far fa-edit" />
+          </a>
+          <a href="#" className="btn-small">
+            <i className="far fa-trash-alt" />
+          </a>
+        </div>
+      );
+    }
+  };
   return (
     <div>
       <div className="destination-wrapper">
@@ -49,17 +67,7 @@ const tripDetail = props => {
             <span className="text-hiline">Itinerary</span>
             <span className="text-actual">{props.data.thingsToDo.length}</span>
           </div>
-          <div className="col s4 right-align icons">
-            <a href="#" className="btn-small">
-              <i className="fas fa-eye" />
-            </a>
-            <a href={props.href} className="btn-small">
-              <i className="far fa-edit" />
-            </a>
-            <a href="#" className="btn-small">
-              <i className="far fa-trash-alt" />
-            </a>
-          </div>
+          {renderButtons()}
         </div>
       </div>
     </div>
