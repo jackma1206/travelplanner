@@ -31,14 +31,13 @@ class sidebar extends Component {
     return list;
   }
 
-  componentWillUpdate() {}
-
   handleActive(i) {
     this.setState({
       activeTab: i
     });
     this.props.onChange(i);
   }
+
   render() {
     return (
       <div className="sidebar">

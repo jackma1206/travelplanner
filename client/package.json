@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "fuse.js": "^3.4.4",
+    "google-maps-react": "^2.0.2",
     "http-proxy-middleware": "^0.19.1",
     "jquery": "^3.4.0",
     "materialize-css": "^1.0.0",

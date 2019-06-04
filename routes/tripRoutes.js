@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const Trip = mongoose.model("trips");
+const rp = require("request-promise");
+const keys = require("../config/keys");
 
 module.exports = app => {
   app.get("/api/trips/:id", async (req, res) => {
@@ -29,6 +31,19 @@ module.exports = app => {
 
     let fromD = fromDest.split(" - ");
     let toD = toDest.split(" - ");
+    const location = `${toD[1]}, ${toD[2]}, ${toD[3]}`;
+    console.log(location);
+    const options = {
+      uri: `http://www.mapquestapi.com/geocoding/v1/address?key=${
+        keys.mapquestKey
+      }&location=${location}`,
+      method: "GET"
+    };
+
+    const response = await rp(options);
+    const json = await JSON.parse(response);
+    const lat = json.results[0].locations[0].latLng.lat;
+    const long = json.results[0].locations[0].latLng.lng;
 
     const trip = new Trip({
       tripName,
@@ -50,6 +65,7 @@ module.exports = app => {
       returnDate,
       flightCost,
       numPeople,
+      location: { lat: lat, long: long },
       thingsToDo: [],
       _user: req.user.id,
       dateCreated: Date.now()

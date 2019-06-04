@@ -4,6 +4,7 @@ import renderDatePicker from "./renderDatePicker";
 import renderDestination from "./renderDestination";
 import moment from "moment";
 import "../../styles/tripForm.scss";
+import "../../styles/tripDetail.scss";
 import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
@@ -99,7 +100,7 @@ class TripEditForm extends Component {
           </div>
 
           <button
-            className="waves-effect waves-light btn right"
+            className="cancel-button waves-effect waves-light btn red lighten-2 right"
             onClick={this.props.toggleEdit}
           >
             Cancel

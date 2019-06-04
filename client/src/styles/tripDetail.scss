@@ -4,4 +4,49 @@
 
 .tripDeets {
   margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.edit-button {
+  float: right;
+  margin-right: 30px;
+  cursor: pointer;
+  color: $blue-grey-lighten;
+}
+
+.cancel-button {
+  margin-left: 10px;
+}
+
+.map-wrap {
+  margin-top: 80px;
+  width: 100%;
+  border: 1px solid black;
+  height: 502px;
+}
+.map {
+  width: 75% !important;
+  height: 500px !important;
+}
+
+.side-list {
+  margin-left: 75%;
+  height: 500px;
+  background: $blue-grey;
+  ul {
+    li {
+      padding: 15px;
+      border-bottom: 1px solid #fff;
+      color: white;
+      &:hover {
+        background: $nav-color;
+        color: white;
+      }
+    }
+  }
+}
+
+.isActive {
+  background: $nav-color;
+  color: white;
 }

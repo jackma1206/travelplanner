@@ -3,16 +3,19 @@ import "../../styles/tripDetail.scss";
 import RenderTrips from "../dash/renderTrips";
 
 const tripDeets = props => {
-  console.log(props);
-
   if (!props.data.toDe) return "loading";
 
   return (
     <div className="tripDeets">
       <div className="coll-wrapper">
         <RenderTrips data={props.data} />
+        <span
+          className="edit-button btn-small grey lighten-2"
+          onClick={props.toggleEdit}
+        >
+          <i className="far fa-edit" /> Edit
+        </span>
       </div>
-      <button onClick={props.toggleEdit}>Press me</button>
     </div>
   );
 };

@@ -23,6 +23,7 @@ const tripSchema = new Schema({
   thingsToDo: [toDoSchema],
   flightCost: Number,
   numPeople: Number,
+  location: { lat: Number, long: Number },
   dateCreated: Date,
   _user: { type: Schema.Types.ObjectId, ref: "User" }
 });
