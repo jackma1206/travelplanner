@@ -1,13 +1,11 @@
 import React from "react";
 
 const placeList = props => {
-  let className = "";
-
   return (
-    <div>
-      <ul>
+    <div className="placelist">
+      <ul className="side-list">
         {props.places.map((place, i) => {
-          className = "";
+          let className = "";
           if (i === props.isActive) {
             className += "isActive";
           }

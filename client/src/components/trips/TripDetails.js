@@ -6,7 +6,7 @@ import TripDeets from "./tripDeets";
 import MapContainer from "../map/Map";
 import "../../styles/tripDetail.scss";
 import PlaceList from "../map/placeList";
-
+import PlaceSearch from "../map/PlaceSearch";
 const data = [
   {
     name: "Sydney",
@@ -39,7 +39,8 @@ class TripEdit extends Component {
       edit: false,
       selectedItem: { lat: 0, lng: 0 },
       showInfo: false,
-      isActive: ""
+      isActive: "",
+      places: data
     };
   }
 
@@ -67,9 +68,18 @@ class TripEdit extends Component {
       });
     }
 
-    console.log(selectedItem);
+    // console.log(selectedItem);
   };
 
+  addPlace = place => {
+    console.log("from place");
+    console.log(place);
+    this.setState({
+      places: this.state.places.concat(place),
+      selectedItem: { lat: place.lat, lng: place.lng }
+    });
+    // console.log(this.state.places);
+  };
   renderMap() {
     if (this.props.trip.location !== undefined) {
       const { long, lat } = this.props.trip.location;
@@ -80,27 +90,21 @@ class TripEdit extends Component {
               lat: lat,
               lng: long
             }}
-            zoom={12}
-            data={data}
+            zoom={10}
+            data={this.state.places}
             selectedItem={this.state.selectedItem}
             showInfo={this.state.showInfo}
           />
-          <div className="side-list">
-            <PlaceList
-              places={data}
-              onClick={this.showInfo}
-              isActive={this.state.isActive}
-            />
-          </div>
+          <PlaceList places={this.state.places} onClick={this.showInfo} />
         </div>
       );
     } else {
       return "loading";
     }
   }
-  //below that is itinerary show map +
+
   render() {
-    console.log(this.props);
+    // console.log(this.state);
 
     return (
       <div>
@@ -121,7 +125,7 @@ class TripEdit extends Component {
 }
 
 //TODO:
-//SHOW MAP AT DESTINATION WHEN COMING TO THIS PAGE, LOAD MARKERS
+
 //set up search for places
 //save places to db after every add
 //FILTERS?

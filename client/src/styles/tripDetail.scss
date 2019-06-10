@@ -30,18 +30,13 @@
 }
 
 .side-list {
-  margin-left: 75%;
-  height: 500px;
-  background: $blue-grey;
-  ul {
-    li {
-      padding: 15px;
-      border-bottom: 1px solid #fff;
+  li {
+    padding: 15px;
+    border-bottom: 1px solid #fff;
+    color: white;
+    &:hover {
+      background: $nav-color;
       color: white;
-      &:hover {
-        background: $nav-color;
-        color: white;
-      }
     }
   }
 }
@@ -49,4 +44,42 @@
 .isActive {
   background: $nav-color;
   color: white;
+}
+
+.placeInput {
+  padding-left: 15px !important;
+
+  color: white;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.customWrapper {
+  border-bottom: 1px solid black;
+  padding: 10px;
+}
+
+.searchbox {
+  float: right;
+  width: 25%;
+  display: block;
+  background: #fff;
+
+  #autocomplete {
+    padding-left: 10px;
+  }
+}
+
+.placelist {
+  display: block;
+  color: black;
+  float: right;
+  border: 1px solid green;
+  width: 25%;
+  position: absolute;
+  right: 0;
+  margin-top: 45px;
+  background: $blue-grey;
+  height: 500px-45px;
+  overflow-y: hidden;
 }
