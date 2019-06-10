@@ -28,8 +28,31 @@
   width: 75% !important;
   height: 500px !important;
 }
+.placelist {
+  display: block;
+  color: black;
+  float: right;
 
+  width: 25%;
+  position: absolute;
+  right: 0;
+  margin-top: 45px;
+
+  height: 500px - 45px;
+  overflow: hidden;
+}
 .side-list {
+  display: block;
+  overflow-y: auto;
+
+  height: 100%;
+  list-style-type: none;
+  background: $blue-grey;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
   li {
     padding: 15px;
     border-bottom: 1px solid #fff;
@@ -67,19 +90,7 @@
 
   #autocomplete {
     padding-left: 10px;
+    width: 100%;
+    box-sizing: border-box;
   }
-}
-
-.placelist {
-  display: block;
-  color: black;
-  float: right;
-  border: 1px solid green;
-  width: 25%;
-  position: absolute;
-  right: 0;
-  margin-top: 45px;
-  background: $blue-grey;
-  height: 500px-45px;
-  overflow-y: hidden;
 }

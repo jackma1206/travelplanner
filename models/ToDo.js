@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const toDoSchema = new mongoose.Schema({
-    name: String,
-    location: String
+  title: String,
+  lat: String,
+  lng: String,
+  address: String
 });
 
 module.exports = toDoSchema;

@@ -1,6 +1,7 @@
 import React from "react";
 
 const placeList = props => {
+  console.log(props);
   return (
     <div className="placelist">
       <ul className="side-list">

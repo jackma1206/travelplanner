@@ -1,5 +1,11 @@
 import axios from "axios";
-import { FETCH_USER, SUBMIT_TRIP, GET_TRIPS, FETCH_TRIP } from "./types";
+import {
+  FETCH_USER,
+  SUBMIT_TRIP,
+  GET_TRIPS,
+  FETCH_TRIP,
+  UPDATE_TODO
+} from "./types";
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get("/api/current_user");
@@ -21,4 +27,10 @@ export const fetchTrip = id => async dispatch => {
   let uri = `/api/trips/${id}`;
   const res = await axios.get(uri);
   dispatch({ type: FETCH_TRIP, payload: res.data });
+};
+
+export const updateToDo = (data, id) => async dispatch => {
+  let uri = `/api/trips/${id}`;
+  const res = await axios.post(uri, data);
+  dispatch({ type: UPDATE_TODO, payload: res.data });
 };

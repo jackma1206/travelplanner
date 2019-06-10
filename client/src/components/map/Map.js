@@ -27,9 +27,15 @@ class MapContainer extends Component {
   };
   handlePlaceChanged = () => {
     const place = this.autocomplete.getPlace();
-    //this.props.onPlaceChanged(place);
-    console.log("here");
-    console.log(place);
+    let lat = place.geometry.location.lat();
+    let lng = place.geometry.location.lng();
+    const data = {
+      title: place.name,
+      lat: lat,
+      lng: lng,
+      address: place.formatted_address
+    };
+    this.props.addPlace(data);
   };
   render() {
     const style = {
