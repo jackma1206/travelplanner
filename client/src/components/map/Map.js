@@ -20,9 +20,7 @@ class MapContainer extends Component {
   setupAutocomplete = (mapProps, map) => {
     const { google } = mapProps;
     const input = document.getElementById("autocomplete");
-    this.autocomplete = new google.maps.places.Autocomplete(input, {
-      types: ["establishment"]
-    });
+    this.autocomplete = new google.maps.places.Autocomplete(input, {});
     this.autocomplete.addListener("place_changed", this.handlePlaceChanged);
   };
   handlePlaceChanged = () => {

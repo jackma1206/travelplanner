@@ -12,10 +12,9 @@ module.exports = app => {
   });
 
   app.post("/api/trips/:id", async (req, res) => {
-    console.log(req.params.id);
     let id = req.params.id;
     const trip = await Trip.findById(id);
-    console.log(trip);
+
     trip.thingsToDo.push(req.body);
     trip.save();
     res.send(trip);
