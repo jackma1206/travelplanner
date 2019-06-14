@@ -1,29 +1,51 @@
-import React from "react";
+import React, { Component } from "react";
 
-const placeList = props => {
-  console.log(props);
-  return (
-    <div className="placelist">
-      <ul className="side-list">
-        {props.places.map((place, i) => {
-          let className = "";
-          if (i === props.isActive) {
-            className += "isActive";
-          }
-          return (
-            <li
-              className={className}
-              id={i}
-              key={i}
-              onClick={e => props.onClick(e, place, i)}
-            >
-              {place.title}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
+class placeList extends Component {
+  state = {
+    hover: false
+  };
 
+  handleHoverOver = e => {
+    this.setState({ hover: true });
+  };
+
+  handleUnHover = () => {
+    this.setState({ hover: false });
+  };
+
+  deletePlace = (e, place) => {
+    this.props.deletePlace(place);
+  };
+
+  render() {
+    return (
+      <div className="placelist">
+        <ul className="side-list">
+          {this.props.places.map((place, i) => {
+            let className = "";
+            if (i === this.props.isActive) {
+              className += " isActive";
+            }
+            return (
+              <li
+                className={className}
+                id={i}
+                key={i}
+                onClick={e => this.props.onClick(e, place, i)}
+              >
+                <span className="placelist-item">{place.title}</span>
+                <span
+                  className="deletePlace"
+                  onClick={e => this.deletePlace(e, place)}
+                >
+                  <i className="fa fa-trash" />
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
+}
 export default placeList;

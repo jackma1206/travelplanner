@@ -4,6 +4,7 @@ const rp = require("request-promise");
 const keys = require("../config/keys");
 
 module.exports = app => {
+  //get 1 trip
   app.get("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
     const trip = await Trip.findById(id);
@@ -11,15 +12,21 @@ module.exports = app => {
     res.send(trip);
   });
 
+  //Add to do
   app.post("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
     const trip = await Trip.findById(id);
 
     trip.thingsToDo.push(req.body);
-    trip.save();
-    res.send(trip);
+    try {
+      await trip.save();
+      res.send(trip);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 
+  //get all trips by user
   app.get("/api/trips", async (req, res) => {
     let id = req.user.id;
     const trips = await Trip.find({ _user: id });
@@ -27,6 +34,21 @@ module.exports = app => {
     res.send(trips);
   });
 
+  //remvoe todo
+  app.get("/api/trips/:id/delete/:toDoId", async (req, res) => {
+    const id = req.params.id;
+    const toDoId = req.params.toDoId;
+    const trip = await Trip.findById(id);
+    trip.thingsToDo.pull({ _id: toDoId });
+    try {
+      await trip.save();
+      res.send(trip);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  //create trip
   app.post("/api/trips", async (req, res) => {
     const {
       tripName,
