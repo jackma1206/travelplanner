@@ -94,3 +94,15 @@
     box-sizing: border-box;
   }
 }
+.placelist-item {
+  position: relative;
+  width: 100%;
+}
+.deletePlace {
+  float: right;
+  cursor: pointer;
+
+  &:hover {
+    color: red;
+  }
+}

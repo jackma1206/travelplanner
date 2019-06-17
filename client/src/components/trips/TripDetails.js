@@ -16,7 +16,8 @@ class TripEdit extends Component {
       selectedItem: { lat: 0, lng: 0 },
       showInfo: false,
       isActive: "",
-      places: []
+      places: [],
+      trip: {}
     };
   }
 
@@ -25,9 +26,10 @@ class TripEdit extends Component {
   };
 
   async componentDidMount() {
-    const { id } = this.props.match.params;
+    let { id } = this.props.match.params;
     await this.props.fetchTrip(id);
     this.setState({
+      trip: this.props.trip,
       places: this.props.trip.thingsToDo
     });
   }
@@ -49,18 +51,26 @@ class TripEdit extends Component {
   };
 
   addPlace = place => {
-    console.log("from place");
-    console.log(place);
-    const { id } = this.props.match.params;
+    let { id } = this.props.match.params;
     this.props.updateToDo(place, id);
+
     this.setState({
+      trip: this.props.trip,
       places: this.state.places.concat(place),
       selectedItem: { lat: place.lat, lng: place.lng }
     });
   };
 
+  deletePlace = place => {
+    let { id } = this.props.match.params;
+    let toDoId = place._id;
+    this.props.deleteToDo(toDoId, id);
+    this.setState(prevState => ({
+      places: prevState.places.filter(el => el._id !== place._id)
+      // selectedItem: { lat: 0, lng: 0 }
+    }));
+  };
   renderMap() {
-    console.log(this.props.trip.thingsToDo);
     if (
       this.props.trip.location !== undefined &&
       this.props.trip.thingsToDo !== undefined
@@ -86,27 +96,39 @@ class TripEdit extends Component {
             showInfo={this.state.showInfo}
             addPlace={this.addPlace}
           />
-          <PlaceList places={this.state.places} onClick={this.showInfo} />
+          <PlaceList
+            places={this.state.places}
+            onClick={this.showInfo}
+            isActive={this.state.isActive}
+            deletePlace={this.deletePlace}
+          />
         </div>
       );
     } else {
       return "loading";
     }
   }
+  editSubmit = async values => {
+    const trip = await this.props.updateTrip(values);
+    console.log(trip);
+    this.setState({
+      trip: this.props.trip,
+      edit: false
+    });
+  };
 
   render() {
-    // console.log(this.state);
-
     return (
       <div>
         <div className="container">
           {this.state.edit ? (
             <TripEditForm
-              initialValues={this.props.trip}
+              initialValues={this.state.trip}
               toggleEdit={this.toggleEdit}
+              onSubmit={values => this.editSubmit(values)}
             />
           ) : (
-            <TripDeets data={this.props.trip} toggleEdit={this.toggleEdit} />
+            <TripDeets data={this.state.trip} toggleEdit={this.toggleEdit} />
           )}
         </div>
         {this.renderMap()}
@@ -120,7 +142,8 @@ class TripEdit extends Component {
 // add marker icon next to list item
 // marker icons on map
 // post info from edit button form
-//
+//fix active highlighting when selecting list
+//onclick for map markers
 
 function mapStateToProps(state) {
   return { auth: state.auth, trip: state.trips };
