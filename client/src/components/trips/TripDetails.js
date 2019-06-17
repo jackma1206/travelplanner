@@ -108,6 +108,14 @@ class TripEdit extends Component {
       return "loading";
     }
   }
+  editSubmit = async values => {
+    const trip = await this.props.updateTrip(values);
+    console.log(trip);
+    this.setState({
+      trip: this.props.trip,
+      edit: false
+    });
+  };
 
   render() {
     return (
@@ -117,6 +125,7 @@ class TripEdit extends Component {
             <TripEditForm
               initialValues={this.state.trip}
               toggleEdit={this.toggleEdit}
+              onSubmit={values => this.editSubmit(values)}
             />
           ) : (
             <TripDeets data={this.state.trip} toggleEdit={this.toggleEdit} />

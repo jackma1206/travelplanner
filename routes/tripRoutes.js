@@ -34,6 +34,24 @@ module.exports = app => {
     res.send(trips);
   });
 
+  //edit trip info
+  app.put("/api/trip/edit", async (req, res) => {
+    let id = req.body._id;
+
+    const trip = await Trip.findOneAndUpdate(
+      { _id: id },
+      { $set: req.body },
+      { new: true }
+    );
+
+    try {
+      await trip.save();
+      res.send(trip);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
   //remvoe todo
   app.get("/api/trips/:id/delete/:toDoId", async (req, res) => {
     const id = req.params.id;

@@ -1,4 +1,9 @@
-import { GET_TRIPS, FETCH_TRIP, UPDATE_TODO } from "../actions/types";
+import {
+  GET_TRIPS,
+  FETCH_TRIP,
+  UPDATE_TODO,
+  UPDATE_TRIP
+} from "../actions/types";
 
 export default function(state = [], action) {
   switch (action.type) {
@@ -7,6 +12,8 @@ export default function(state = [], action) {
     case FETCH_TRIP:
       return action.payload;
     case UPDATE_TODO:
+      return action.payload;
+    case UPDATE_TRIP:
       return action.payload;
     default:
       return state;

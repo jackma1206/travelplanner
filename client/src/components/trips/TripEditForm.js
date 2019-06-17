@@ -9,15 +9,6 @@ import { airports } from "./airportsList";
 import renderInput from "./renderInput";
 
 class TripEditForm extends Component {
-  //Create new field to search locations based on name
-
-  //combine places autocomplete with geocoding????
-
-  //push it to db as they add locations with price?
-
-  //show their newly added location with every push
-
-  //show map on detail page
   render() {
     const { handleSubmit, submitting, pristine } = this.props;
 
@@ -144,13 +135,13 @@ const validate = values => {
   } else if (isNaN(values.numPeople)) {
     errors.numPeople = "Please use a number";
   }
-  let dNow = new Date();
-  let d1 = Date.parse(values.departDate);
-  let d2 = Date.parse(values.returnDate);
-  if (d1 > d2 || dNow > d1) {
-    errors.departDate = "Travel dates invalid";
-    errors.returnDate = "Travel dates invalid";
-  }
+  // let dNow = new Date();
+  // let d1 = Date.parse(values.departDate);
+  // let d2 = Date.parse(values.returnDate);
+  // if (d1 > d2 || dNow > d1) {
+  //   errors.departDate = "Travel dates invalid";
+  //   errors.returnDate = "Travel dates invalid";
+  // }
 
   return errors;
 };
