@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import Landing from "./Landing";
+import Landing from "./landing/Landing";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import TripDetails from "./trips/TripDetails";
