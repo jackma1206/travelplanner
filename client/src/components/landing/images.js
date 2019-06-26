@@ -13,11 +13,11 @@ export const toronto_img =
 
 export const data = [
   {
-    name: "San Fransisco Getaway",
+    name: "San Francisco Getaway",
     todo: 17,
     image: sf_img,
     description:
-      "Experience San Fransisco like a local. Tons of amazing things to see, eat and do!"
+      "Experience San Francisco like a local. Tons of amazing things to see, eat and do!"
   },
   {
     name: "Exploring New York City",
@@ -48,7 +48,7 @@ export const data = [
       "Relax and rewind with these awesome places in Hawaii. Perfect for a family trip or a honeymoon!"
   },
   {
-    name: "Toronto sightseeing",
+    name: "Toronto Sightseeing",
     todo: 19,
     image: toronto_img,
     description: "A list of all the best Toronto locations to explore."

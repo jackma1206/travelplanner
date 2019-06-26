@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import "../../styles/landing.scss";
 import FeaturedCard from "./card";
-import {
-  nyc_img,
-  sf_img,
-  paris_img,
-  beijing_img,
-  hawaii_img,
-  toronto_img,
-  data
-} from "./images";
+import { data } from "./images";
 
 class Landing extends Component {
   renderFeaturedTrips() {
