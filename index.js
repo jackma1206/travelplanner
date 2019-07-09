@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 require("./routes/authRoutes")(app);
 require("./routes/tripRoutes")(app);
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 
