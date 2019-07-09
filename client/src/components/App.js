@@ -6,7 +6,7 @@ import Landing from "./landing/Landing";
 import Header from "./Header";
 import Dashboard from "./Dashboard";
 import TripDetails from "./trips/TripDetails";
-
+import AllTrips from "./AllTrips";
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -19,7 +19,7 @@ class App extends Component {
           <div>
             <Header />
             <Route path="/" exact component={Landing} />
-            {/* <Route path="/trips/new" exact component={TripsNew} /> */}
+            <Route path="/trips/all" exact component={AllTrips} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/dashboard/trips/:id" exact component={TripDetails} />
           </div>

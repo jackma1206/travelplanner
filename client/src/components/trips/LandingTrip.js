@@ -7,7 +7,7 @@ import ReactModal from "react-modal";
 import "../../styles/tripForm.scss";
 import { withRouter } from "react-router";
 
-class TripsNew extends Component {
+class LandingTripButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,11 +32,10 @@ class TripsNew extends Component {
     const { history } = this.props;
     return (
       <div>
-        <li className="waves-effect" onClick={this.handleModalOpen}>
-          <span className="dash-icon">
-            <i className="fas fa-plus-circle" /> {this.props.text}
-          </span>
-        </li>
+        <span className="dash-icon btn" onClick={this.handleModalOpen}>
+          {this.props.text}
+        </span>
+
         <ReactModal
           isOpen={this.state.showModal}
           closeTimeoutMS={600}
@@ -51,7 +50,7 @@ class TripsNew extends Component {
           }}
         >
           <div className="modal-header">
-            <h3>Add a new trip</h3>
+            <h3>Plan A Trip</h3>
             <span onClick={this.handleModalClose}>
               <i className="fa fa-times" />
             </span>
@@ -67,8 +66,8 @@ class TripsNew extends Component {
   }
 }
 
-TripsNew = connect(
+LandingTripButton = connect(
   null,
   actions
-)(withRouter(TripsNew));
-export default reduxForm({ form: "tripForm" })(TripsNew);
+)(withRouter(LandingTripButton));
+export default reduxForm({ form: "landingTripForm" })(LandingTripButton);

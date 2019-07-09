@@ -89,7 +89,24 @@ class TripEditForm extends Component {
               />
             </div>
           </div>
-
+          <div className="row">
+            <div className="col s12">
+              <Field
+                component={renderInput}
+                type="text"
+                label="Description"
+                name="description"
+              />
+            </div>
+            <div className="col s12">
+              <Field
+                component={renderInput}
+                type="text"
+                label="Image Link"
+                name="image"
+              />
+            </div>
+          </div>
           <button
             className="cancel-button waves-effect waves-light btn red lighten-2 right"
             onClick={this.props.toggleEdit}
@@ -135,6 +152,10 @@ const validate = values => {
   } else if (isNaN(values.numPeople)) {
     errors.numPeople = "Please use a number";
   }
+  if (!values.description) {
+    errors.description = "Required";
+  }
+
   // let dNow = new Date();
   // let d1 = Date.parse(values.departDate);
   // let d2 = Date.parse(values.returnDate);

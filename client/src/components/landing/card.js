@@ -1,15 +1,20 @@
 import React from "react";
+import FaveStar from "../star/FaveStar";
 
 const Card = props => {
-  const { name, todo, image, description } = props.data;
-
+  const { tripName, image, description, thingsToDo } = props.data;
+  const { href } = props;
+  const tId = props.data._id;
   return (
     <div className="card">
       <div className="card-image">
         <img src={image} alt="city" />
-        <span className="card-title">{name}</span>
-        <a className="btn-floating halfway-fab waves-effect waves-light red">
-          <i class="fas fa-angle-right" />
+        <span className="card-title">{tripName}</span>
+        <a
+          href={href}
+          className="btn-floating halfway-fab waves-effect waves-light red"
+        >
+          <i className="fas fa-angle-right" />
         </a>
       </div>
       <div className="card-content">
@@ -20,15 +25,11 @@ const Card = props => {
           <ul>
             <li>
               <span className="marker-icon">
-                <i class="fas fa-map-marker-alt" />
+                <i className="fas fa-map-marker-alt" />
               </span>
-              <span className="todo-number">{todo}</span>
+              <span className="todo-number">{thingsToDo.length}</span>
             </li>
-            <li>
-              <span className="star-icon">
-                <i className="fa fa-star" />
-              </span>
-            </li>
+            <FaveStar tId={tId} />
           </ul>
         </div>
       </div>

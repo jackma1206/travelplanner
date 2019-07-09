@@ -1,9 +1,37 @@
 const mongoose = require("mongoose");
 const Trip = mongoose.model("trips");
+const User = mongoose.model("users");
 const rp = require("request-promise");
 const keys = require("../config/keys");
 
 module.exports = app => {
+  //add to fave  trip
+  app.post("/api/:uId/addFave/:tId", async (req, res) => {
+    let { uId, tId } = req.params;
+
+    const user = await User.findById(uId);
+    user.trips.push(tId);
+    try {
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+  //remove fave trip
+  app.put("/api/:uId/deleteFave/:tId", async (req, res) => {
+    let { uId, tId } = req.params;
+
+    const user = await User.findById(uId);
+    let index = user.trips.indexOf(tId);
+    user.trips.splice(index, 1);
+    try {
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
   //get 1 trip
   app.get("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
@@ -25,6 +53,15 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+  app.get("/api/alltrips", async (req, res) => {
+    const trips = await Trip.find({});
+
+    try {
+      res.send(trips);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
 
   //get all trips by user
   app.get("/api/trips", async (req, res) => {
@@ -34,6 +71,13 @@ module.exports = app => {
     res.send(trips);
   });
 
+  //get featured trips
+
+  app.get("/api/featuredTrip", async (req, res) => {
+    const trips = await Trip.aggregate([{ $sample: { size: 6 } }]);
+    console.log(trips);
+    res.send(trips);
+  });
   //edit trip info
   app.put("/api/trip/edit", async (req, res) => {
     let id = req.body._id;
@@ -52,7 +96,7 @@ module.exports = app => {
     }
   });
 
-  //remvoe todo
+  //remove todo
   app.get("/api/trips/:id/delete/:toDoId", async (req, res) => {
     const id = req.params.id;
     const toDoId = req.params.toDoId;
@@ -75,7 +119,9 @@ module.exports = app => {
       departDate,
       returnDate,
       flightCost,
-      numPeople
+      numPeople,
+      description,
+      image
     } = req.body;
 
     let fromD = fromDest.split(" - ");
@@ -98,6 +144,8 @@ module.exports = app => {
       tripName,
       fromDest,
       toDest,
+      description,
+      image,
       toDe: {
         city: toD[2],
         country: toD[3],
@@ -122,8 +170,11 @@ module.exports = app => {
     try {
       await trip.save();
       res.send(trip);
+      console.log(trip);
     } catch (err) {
       res.status(422).send(err);
     }
   });
 };
+
+//add to fave trip

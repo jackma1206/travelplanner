@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6",
     "react-google-maps-loader": "^4.2.5",
     "react-google-places-suggest": "^3.8.0",
+    "react-loader-spinner": "^2.3.0",
     "react-materialize": "^3.3.0",
     "react-modal": "^3.8.1",
     "react-redux": "^7.0.2",

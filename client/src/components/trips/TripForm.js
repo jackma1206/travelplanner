@@ -87,7 +87,24 @@ const TripForm = props => {
             />
           </div>
         </div>
-
+        <div className="row">
+          <div className="col s12">
+            <Field
+              component={renderInput}
+              type="text"
+              label="Description"
+              name="description"
+            />
+          </div>
+          <div className="col s12">
+            <Field
+              component={renderInput}
+              type="text"
+              label="Image Link"
+              name="image"
+            />
+          </div>
+        </div>
         <button
           className="waves-effect waves-light btn right submit-button"
           type="submit"
@@ -139,7 +156,9 @@ const validate = values => {
     errors.departDate = "Travel dates invalid";
     errors.returnDate = "Travel dates invalid";
   }
-
+  if (!values.description) {
+    errors.description = "Required";
+  }
   return errors;
 };
 

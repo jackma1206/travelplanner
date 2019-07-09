@@ -6,7 +6,9 @@ import {
   FETCH_TRIP,
   UPDATE_TODO,
   DELETE_TODO,
-  UPDATE_TRIP
+  UPDATE_TRIP,
+  DELETE_FAVE,
+  ADD_FAVE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -16,12 +18,18 @@ export const fetchUser = () => async dispatch => {
 
 export const submitTrip = (values, history) => async dispatch => {
   const res = await axios.post("/api/trips", values);
-  history.push("/dashboard");
+  const uri = `/dashboard/trips/${res.data._id}`;
+  history.push(uri);
   dispatch({ type: SUBMIT_TRIP, payload: res.data });
 };
 
 export const getTrips = () => async dispatch => {
   const res = await axios.get("/api/trips");
+  dispatch({ type: GET_TRIPS, payload: res.data });
+};
+
+export const getAllTrips = () => async dispatch => {
+  const res = await axios.get("/api/alltrips");
   dispatch({ type: GET_TRIPS, payload: res.data });
 };
 
@@ -47,4 +55,21 @@ export const updateTrip = values => async dispatch => {
   let uri = "/api/trip/edit";
   const res = await axios.put(uri, values);
   dispatch({ type: UPDATE_TRIP, payload: res.data });
+};
+
+export const addFave = (uId, tId) => async dispatch => {
+  let uri = `/api/${uId}/addFave/${tId}`;
+  const res = await axios.post(uri);
+  dispatch({ type: ADD_FAVE, payload: res.data });
+};
+export const deleteFave = (uId, tId) => async dispatch => {
+  let uri = `/api/${uId}/deleteFave/${tId}`;
+
+  const res = await axios.put(uri);
+  dispatch({ type: DELETE_FAVE, payload: res.data });
+};
+
+export const getFeatured = () => async dispatch => {
+  const res = await axios.get("/api/featuredTrip");
+  dispatch({ type: GET_TRIPS, payload: res.data });
 };

@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import "../../styles/tripDetail.scss";
 
-//TODO
-//setvalue of input or send it up and save to db rerender the new ones
-//handle the click..
 class MapContainer extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +32,16 @@ class MapContainer extends Component {
     };
     this.props.addPlace(data);
   };
+
+  onMarkerClick = (props, marker, e) => {
+    console.log(e);
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: !this.state.showingInfoWindow
+    });
+  };
+
   render() {
     const style = {
       width: "100%",
@@ -55,6 +62,7 @@ class MapContainer extends Component {
             zoom={this.props.zoom}
             initialCenter={center}
             onReady={this.setupAutocomplete}
+            onClick={this.props.onMapClick}
           >
             {data.map((item, i) => (
               <Marker
@@ -62,6 +70,8 @@ class MapContainer extends Component {
                 title={item.title}
                 name={item.title}
                 position={{ lat: item.lat, lng: item.lng }}
+                onClick={this.props.markerClick}
+                id={i}
               />
             ))}
 
@@ -72,7 +82,7 @@ class MapContainer extends Component {
                 lng: this.props.selectedItem.lng
               }}
             >
-              <div>
+              <div className="infoWindow">
                 <h1>{this.props.selectedItem.title}</h1>
               </div>
             </InfoWindow>
@@ -83,7 +93,7 @@ class MapContainer extends Component {
             type="text"
             id="autocomplete"
             ref={this.autocompleteInput}
-            placeholder="Enter a location"
+            placeholder="Enter a location to add to the map"
           />
         </div>
       </div>

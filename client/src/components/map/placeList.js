@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class placeList extends Component {
+class PlaceList extends Component {
   state = {
     hover: false
   };
@@ -23,15 +23,16 @@ class placeList extends Component {
         <ul className="side-list">
           {this.props.places.map((place, i) => {
             let className = "";
-            if (i === this.props.isActive) {
+            if (place.title === this.props.isActive) {
               className += " isActive";
             }
+
             return (
               <li
                 className={className}
                 id={i}
                 key={i}
-                onClick={e => this.props.onClick(e, place, i)}
+                onClick={e => this.props.onClick(place, i)}
               >
                 <span className="placelist-item">{place.title}</span>
                 <span
@@ -48,4 +49,4 @@ class placeList extends Component {
     );
   }
 }
-export default placeList;
+export default PlaceList;

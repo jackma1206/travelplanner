@@ -12,12 +12,22 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      trips: [],
       activeTab: 0
     };
   }
-  componentDidMount() {
-    this.props.getTrips();
+  async componentDidMount() {
+    await this.props.getTrips();
+    this.setState({
+      trips: this.props.trips
+    });
   }
+
+  updateList = trip => {
+    this.setState({
+      trips: this.state.trips.concat(trip)
+    });
+  };
 
   getActiveTab = value => {
     this.setState({
@@ -26,11 +36,11 @@ class Dashboard extends Component {
   };
 
   renderTrips() {
-    return this.props.trips.reverse().map((trip, i) => {
+    return this.state.trips.reverse().map((trip, i) => {
       let href = `/dashboard/trips/${trip._id}`;
       return (
         <CollapsibleItem key={i} className="coll-item" header={trip.tripName}>
-          <RenderTrip data={trip} href={href} />
+          <RenderTrip data={trip} href={href} addTrip={this.updateList} />
         </CollapsibleItem>
       );
     });

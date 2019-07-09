@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as actions from "../../actions";
 import { connect } from "react-redux";
 import TripEditForm from "./TripEditForm";
-import TripDeets from "./tripDeets";
+import TripEditDetails from "./tripEditDetails";
 import MapContainer from "../map/Map";
 import "../../styles/tripDetail.scss";
 import PlaceList from "../map/placeList";
@@ -34,12 +34,12 @@ class TripEdit extends Component {
     });
   }
 
-  showInfo = (e, selectedItem, id) => {
+  showInfo = selectedItem => {
     if (selectedItem !== this.state.selectedItem) {
       this.setState({
         selectedItem: selectedItem,
         showInfo: true,
-        isActive: id
+        isActive: selectedItem.title
       });
     } else {
       this.setState({
@@ -50,6 +50,23 @@ class TripEdit extends Component {
     }
   };
 
+  markerClick = (props, marker, e) => {
+    let temp = {
+      lat: props.position.lat,
+      lng: props.position.lng,
+      title: props.title
+    };
+    this.showInfo(temp);
+  };
+
+  onMapClick = () => {
+    if (this.state.showInfo) {
+      this.setState({
+        showInfo: false,
+        isActive: ""
+      });
+    }
+  };
   addPlace = place => {
     let { id } = this.props.match.params;
     this.props.updateToDo(place, id);
@@ -67,9 +84,9 @@ class TripEdit extends Component {
     this.props.deleteToDo(toDoId, id);
     this.setState(prevState => ({
       places: prevState.places.filter(el => el._id !== place._id)
-      // selectedItem: { lat: 0, lng: 0 }
     }));
   };
+
   renderMap() {
     if (
       this.props.trip.location !== undefined &&
@@ -95,6 +112,8 @@ class TripEdit extends Component {
             selectedItem={this.state.selectedItem}
             showInfo={this.state.showInfo}
             addPlace={this.addPlace}
+            markerClick={this.markerClick}
+            onMapClick={this.onMapClick}
           />
           <PlaceList
             places={this.state.places}
@@ -109,8 +128,8 @@ class TripEdit extends Component {
     }
   }
   editSubmit = async values => {
-    const trip = await this.props.updateTrip(values);
-    console.log(trip);
+    await this.props.updateTrip(values);
+
     this.setState({
       trip: this.props.trip,
       edit: false
@@ -128,7 +147,10 @@ class TripEdit extends Component {
               onSubmit={values => this.editSubmit(values)}
             />
           ) : (
-            <TripDeets data={this.state.trip} toggleEdit={this.toggleEdit} />
+            <TripEditDetails
+              data={this.state.trip}
+              toggleEdit={this.toggleEdit}
+            />
           )}
         </div>
         {this.renderMap()}
@@ -140,10 +162,6 @@ class TripEdit extends Component {
 //TODO:
 
 // add marker icon next to list item
-// marker icons on map
-// post info from edit button form
-//fix active highlighting when selecting list
-//onclick for map markers
 
 function mapStateToProps(state) {
   return { auth: state.auth, trip: state.trips };

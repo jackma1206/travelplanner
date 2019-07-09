@@ -61,43 +61,6 @@
   }
 }
 
-.footer {
-  height: 200px;
-  width: 100%;
-  background: $blue-grey;
-  text-align: center;
-  display: table;
-}
-.footer-content {
-  display: table-cell;
-  vertical-align: middle;
-
-  p {
-    color: white;
-    font-family: "Roboto", "sans-serif";
-    padding-bottom: 10px;
-  }
-  ul {
-    text-align: center;
-
-    li {
-      display: inline-block;
-      margin-left: 5px;
-    }
-  }
-}
-
-.footer-icon {
-  color: #fff;
-  width: 60px;
-  height: 60px;
-  padding: 5px;
-  font-size: 20px;
-
-  &:hover {
-    color: $nav-color;
-  }
-}
 .card .card-content {
   padding: 0;
 }
@@ -124,6 +87,10 @@
     &:hover {
       color: $nav-color;
     }
+
+    &.fave {
+      color: $nav-color;
+    }
   }
   .marker-icon {
     color: $nav-color;
@@ -135,4 +102,12 @@
     color: black;
     font-weight: bold;
   }
+}
+
+.hero-button {
+  margin-top: 10px;
+}
+
+.load-spinner {
+  text-align: center;
 }

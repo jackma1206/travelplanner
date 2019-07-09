@@ -13,42 +13,42 @@ export const toronto_img =
 
 export const data = [
   {
-    name: "San Francisco Getaway",
+    tripName: "San Francisco Getaway",
     todo: 17,
     image: sf_img,
     description:
       "Experience San Francisco like a local. Tons of amazing things to see, eat and do!"
   },
   {
-    name: "Exploring New York City",
+    tripName: "Exploring New York City",
     todo: 14,
     image: nyc_img,
     description:
       "Conquer the concrete jungle with these highly rated places to visit when going to NYC!"
   },
   {
-    name: "Paris Honeymoon",
+    tripName: "Paris Honeymoon",
     todo: 18,
     image: paris_img,
     description:
       "Perfect for lovebirds who want to explore Paris and enjoy a romantic getaway!"
   },
   {
-    name: "The Beijing Experience",
+    tripName: "The Beijing Experience",
     todo: 15,
     image: beijing_img,
     description:
       "No need for a tour guide, with this itinerary you will be expierencing everything that Beijing has to offer."
   },
   {
-    name: "Hawaii Getaway",
+    tripName: "Hawaii Getaway",
     todo: 12,
     image: hawaii_img,
     description:
       "Relax and rewind with these awesome places in Hawaii. Perfect for a family trip or a honeymoon!"
   },
   {
-    name: "Toronto Sightseeing",
+    tripName: "Toronto Sightseeing",
     todo: 19,
     image: toronto_img,
     description: "A list of all the best Toronto locations to explore."

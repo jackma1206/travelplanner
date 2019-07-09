@@ -43,7 +43,7 @@ class sidebar extends Component {
       <div className="sidebar">
         <ul>
           {this.renderFields(FIELDS)}
-          <TripsNew />
+          <TripsNew text={"New Trip"} />
           <li className="waves-effect logout-dash">
             <span className="dash-icon">
               <a href="/api/logout">

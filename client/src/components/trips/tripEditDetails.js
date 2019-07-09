@@ -2,7 +2,7 @@ import React from "react";
 import "../../styles/tripDetail.scss";
 import RenderTrips from "../dash/renderTrips";
 
-const tripDeets = props => {
+const tripEditDetails = props => {
   if (!props.data.toDe) return "loading";
 
   return (
@@ -20,4 +20,4 @@ const tripDeets = props => {
   );
 };
 
-export default tripDeets;
+export default tripEditDetails;
