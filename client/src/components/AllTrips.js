@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TripCard from "./landing/card";
 import * as actions from "../actions";
 import { connect } from "react-redux";
-
+import "../styles/alltrips.scss";
 class AllTrips extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,6 @@ class AllTrips extends Component {
     this.setState({
       trips: this.props.trips
     });
-    console.log(this.props.trips);
   }
 
   renderTrips() {
@@ -31,7 +30,8 @@ class AllTrips extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container alltrip">
+        <h3 className="lead">Featured Trips</h3>
         <div className="row">{this.renderTrips()}</div>
       </div>
     );

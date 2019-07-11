@@ -44,7 +44,7 @@ module.exports = app => {
   app.post("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
     const trip = await Trip.findById(id);
-
+    console.log(req.body);
     trip.thingsToDo.push(req.body);
     try {
       await trip.save();
@@ -75,7 +75,7 @@ module.exports = app => {
 
   app.get("/api/featuredTrip", async (req, res) => {
     const trips = await Trip.aggregate([{ $sample: { size: 6 } }]);
-    console.log(trips);
+
     res.send(trips);
   });
   //edit trip info
@@ -127,7 +127,7 @@ module.exports = app => {
     let fromD = fromDest.split(" - ");
     let toD = toDest.split(" - ");
     const location = `${toD[1]}, ${toD[2]}, ${toD[3]}`;
-    console.log(location);
+
     const options = {
       uri: `http://www.mapquestapi.com/geocoding/v1/address?key=${
         keys.mapquestKey
@@ -170,7 +170,6 @@ module.exports = app => {
     try {
       await trip.save();
       res.send(trip);
-      console.log(trip);
     } catch (err) {
       res.status(422).send(err);
     }

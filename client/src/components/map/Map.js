@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import "../../styles/tripDetail.scss";
+import OpenHours from "./OpenHours";
 
 class MapContainer extends Component {
   constructor(props) {
@@ -11,9 +12,11 @@ class MapContainer extends Component {
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {}
+      selectedPlace: {},
+      selectedData: []
     };
   }
+
   setupAutocomplete = (mapProps, map) => {
     const { google } = mapProps;
     const input = document.getElementById("autocomplete");
@@ -24,23 +27,43 @@ class MapContainer extends Component {
     const place = this.autocomplete.getPlace();
     let lat = place.geometry.location.lat();
     let lng = place.geometry.location.lng();
+    console.log(place);
+    let hours = [];
+    if (place.opening_hours !== undefined) {
+      hours = place.opening_hours.weekday_text;
+    }
+
+    let phone = place.formatted_phone_number || "";
+    let site = place.website || "";
+
     const data = {
       title: place.name,
       lat: lat,
       lng: lng,
-      address: place.formatted_address
+      address: place.formatted_address,
+      icon: place.icon,
+      site: site,
+      hours: hours,
+      phone: phone
     };
     this.props.addPlace(data);
   };
 
-  onMarkerClick = (props, marker, e) => {
-    console.log(e);
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: !this.state.showingInfoWindow
-    });
-  };
+  renderInfoWindow() {
+    const { hours } = this.props.selectedItem;
+
+    if (!this.props.selectedItem) {
+      return "loading";
+    }
+    if (!this.props.selectedItem.hours) {
+      return;
+    }
+
+    return <OpenHours hours={hours} />;
+    // return hours.map((day, i) => {
+    //   return <li key={i}>{day}</li>;
+    // });
+  }
 
   render() {
     const style = {
@@ -72,6 +95,10 @@ class MapContainer extends Component {
                 position={{ lat: item.lat, lng: item.lng }}
                 onClick={this.props.markerClick}
                 id={i}
+                icon={{
+                  url: item.icon,
+                  scaledSize: new google.maps.Size(32, 32)
+                }}
               />
             ))}
 
@@ -82,8 +109,8 @@ class MapContainer extends Component {
                 lng: this.props.selectedItem.lng
               }}
             >
-              <div className="infoWindow">
-                <h1>{this.props.selectedItem.title}</h1>
+              <div className="infoContent">
+                <ul>{this.renderInfoWindow()}</ul>
               </div>
             </InfoWindow>
           </Map>
