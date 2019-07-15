@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
 import "../../styles/tripDetail.scss";
 import OpenHours from "./OpenHours";
@@ -13,7 +14,8 @@ class MapContainer extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      selectedData: []
+      selectedData: [],
+      expand: false
     };
   }
 
@@ -55,16 +57,37 @@ class MapContainer extends Component {
     if (!this.props.selectedItem) {
       return "loading";
     }
-    if (!this.props.selectedItem.hours) {
-      return;
+    if (hours === undefined) {
+      return "hello";
+    } else {
+      return <OpenHours hours={hours} expand={this.state.expand} />;
     }
 
-    return <OpenHours hours={hours} />;
     // return hours.map((day, i) => {
     //   return <li key={i}>{day}</li>;
     // });
   }
+  onInfoWindowOpen() {
+    const word = !this.state.expand ? "Store Hours" : "Show Less";
+    const button = (
+      <button
+        onClick={e => {
+          this.setState({ expand: !this.state.expand });
+        }}
+      >
+        {word}
+      </button>
+    );
+    ReactDOM.render(
+      React.Children.only(button),
+      document.getElementById("iwc")
+    );
+  }
 
+  onInfoWindowClose() {
+    this.setState({ expand: false, showingInfoWindow: false });
+    console.log("here");
+  }
   render() {
     const style = {
       width: "100%",
@@ -108,9 +131,14 @@ class MapContainer extends Component {
                 lat: this.props.selectedItem.lat,
                 lng: this.props.selectedItem.lng
               }}
+              onOpen={e => {
+                this.onInfoWindowOpen();
+              }}
             >
               <div className="infoContent">
                 <ul>{this.renderInfoWindow()}</ul>
+
+                <div id="iwc" />
               </div>
             </InfoWindow>
           </Map>
