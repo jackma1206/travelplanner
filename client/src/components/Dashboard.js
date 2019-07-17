@@ -4,8 +4,10 @@ import "../styles/dashboard.scss";
 import Sidebar from "./sidebar/sidebar";
 import * as actions from "../actions";
 import RenderTrip from "./dash/renderTrips";
+import SavedTripCard from "./landing/card";
 
-// import M from "materialize-css";
+import Loader from "react-loader-spinner";
+
 import { Collapsible, CollapsibleItem } from "react-materialize";
 
 class Dashboard extends Component {
@@ -13,13 +15,20 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       trips: [],
+      faveTrips: [],
       activeTab: 0
     };
   }
   async componentDidMount() {
     await this.props.getTrips();
+
     this.setState({
       trips: this.props.trips
+    });
+
+    await this.props.getFaveTrips();
+    this.setState({
+      faveTrips: this.props.trips
     });
   }
 
@@ -45,26 +54,48 @@ class Dashboard extends Component {
       );
     });
   }
+
+  renderSavedTrips() {
+    if (!this.state.faveTrips) {
+      return (
+        <div className="load-spinner">
+          <Loader type="Plane" color="#00BFFF" height="25" width="25" />
+        </div>
+      );
+    }
+    return this.state.faveTrips.map((trip, i) => {
+      let href = `/view/${trip._id}`;
+      return (
+        <div className="col s4">
+          <SavedTripCard data={trip} href={href} key={trip._id} />
+        </div>
+      );
+    });
+  }
+
   renderDash = () => {
     switch (this.state.activeTab) {
       case null:
         return;
       case 0:
         return (
-          <Collapsible popout className="coll-wrapper">
-            {this.renderTrips()}
-          </Collapsible>
+          <div className="">
+            <h1>Dashboard</h1>
+            <Collapsible popout className="coll-wrapper">
+              {this.renderTrips()}
+            </Collapsible>
+          </div>
         );
       case 1:
         return (
           <div>
-            <h1>My Trips</h1>
-            {this.renderTrips()}
+            <h1>Saved Trips</h1>
+            <div className="">
+              <div className="row">{this.renderSavedTrips()}</div>
+            </div>
           </div>
         );
 
-      case 2:
-        return <h3>Bruh</h3>;
       default:
         return <p>Loading</p>;
     }
@@ -75,10 +106,7 @@ class Dashboard extends Component {
       <div>
         <Sidebar onChange={this.getActiveTab} />
         <div className="dashboard">
-          <div className="container">
-            <h1>Dashboard</h1>
-            {this.renderDash()}
-          </div>
+          <div className="container">{this.renderDash()}</div>
         </div>
       </div>
     );

@@ -7,3 +7,4 @@ export const DELETE_TODO = "DELETE_TODO";
 export const UPDATE_TRIP = "UPDATE_TRIP";
 export const ADD_FAVE = "ADD_FAVE";
 export const DELETE_FAVE = "DELETE_FAVE";
+export const GET_FAVE = "GET_FAVE";

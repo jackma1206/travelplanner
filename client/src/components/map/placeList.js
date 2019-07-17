@@ -22,26 +22,29 @@ class PlaceList extends Component {
       <div className="placelist">
         <ul className="side-list">
           {this.props.places.map((place, i) => {
-            let className = "";
+            let className = "placelist-item";
+
             if (place.title === this.props.isActive) {
               className += " isActive";
             }
 
             return (
-              <li
-                className={className}
-                id={i}
-                key={i}
-                onClick={e => this.props.onClick(place, i)}
-              >
-                <span className="placelist-item">{place.title}</span>
-                <span
-                  className="deletePlace"
-                  onClick={e => this.deletePlace(e, place)}
+              <div className="place-container">
+                <li
+                  className={className}
+                  id={i}
+                  key={`${place.title}${i}`}
+                  onClick={e => this.props.onClick(place, i)}
                 >
-                  <i className="fa fa-trash" />
-                </span>
-              </li>
+                  <span className="placelist-item">{place.title}</span>
+                  <span
+                    className="deletePlace"
+                    onClick={e => this.deletePlace(e, place)}
+                  >
+                    <i className="fa fa-trash" />
+                  </span>
+                </li>
+              </div>
             );
           })}
         </ul>

@@ -29,8 +29,8 @@ class MapContainer extends Component {
     const place = this.autocomplete.getPlace();
     let lat = place.geometry.location.lat();
     let lng = place.geometry.location.lng();
-    console.log(place);
-    let hours = [];
+
+    let hours;
     if (place.opening_hours !== undefined) {
       hours = place.opening_hours.weekday_text;
     }
@@ -51,32 +51,30 @@ class MapContainer extends Component {
     this.props.addPlace(data);
   };
 
-  renderInfoWindow() {
+  renderHours() {
     const { hours } = this.props.selectedItem;
 
     if (!this.props.selectedItem) {
       return "loading";
     }
-    if (hours === undefined) {
-      return "hello";
+    if (!hours) {
+      return;
     } else {
       return <OpenHours hours={hours} expand={this.state.expand} />;
     }
-
-    // return hours.map((day, i) => {
-    //   return <li key={i}>{day}</li>;
-    // });
   }
   onInfoWindowOpen() {
-    const word = !this.state.expand ? "Store Hours" : "Show Less";
+    let word = !this.state.expand ? "More Info" : "Show Less";
+
     const button = (
-      <button
+      <span
+        className="more-button"
         onClick={e => {
           this.setState({ expand: !this.state.expand });
         }}
       >
         {word}
-      </button>
+      </span>
     );
     ReactDOM.render(
       React.Children.only(button),
@@ -86,7 +84,6 @@ class MapContainer extends Component {
 
   onInfoWindowClose() {
     this.setState({ expand: false, showingInfoWindow: false });
-    console.log("here");
   }
   render() {
     const style = {
@@ -136,7 +133,26 @@ class MapContainer extends Component {
               }}
             >
               <div className="infoContent">
-                <ul>{this.renderInfoWindow()}</ul>
+                <h3>{this.props.selectedItem.title}</h3>
+                {this.state.expand && (
+                  <div>
+                    <p className="info-address">
+                      {this.props.selectedItem.address}
+                    </p>
+                    <a
+                      className="info-site"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={this.props.selectedItem.site}
+                    >
+                      {this.props.selectedItem.site}
+                    </a>
+                    <p className="info-phone">
+                      {this.props.selectedItem.phone}
+                    </p>
+                  </div>
+                )}
+                <ul>{this.renderHours()}</ul>
 
                 <div id="iwc" />
               </div>

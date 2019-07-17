@@ -8,7 +8,8 @@ import {
   DELETE_TODO,
   UPDATE_TRIP,
   DELETE_FAVE,
-  ADD_FAVE
+  ADD_FAVE,
+  GET_FAVE
 } from "./types";
 
 export const fetchUser = () => async dispatch => {
@@ -72,4 +73,9 @@ export const deleteFave = (uId, tId) => async dispatch => {
 export const getFeatured = () => async dispatch => {
   const res = await axios.get("/api/featuredTrip");
   dispatch({ type: GET_TRIPS, payload: res.data });
+};
+
+export const getFaveTrips = () => async dispatch => {
+  const res = await axios.get("/api/getFaveTrips");
+  dispatch({ type: GET_FAVE, payload: res.data });
 };

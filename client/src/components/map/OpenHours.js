@@ -9,18 +9,22 @@ class OpenHours extends Component {
   }
 
   renderHours() {
-    const { hours } = this.props;
-    // console.log(this.state.readMore);
-    console.log("here");
-    if (this.props.expand) {
-      // console.log(this.state.readMore);
-      return hours.map((day, i) => {
-        return <li key={i}>{day}</li>;
-      });
-    }
+    let { hours } = this.props;
+    let days = ["Mon", "Tues", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    // if (this.props.expand) {
+    return hours.map((day, i) => {
+      let time = day.split(": ");
+
+      return (
+        <tr className="hours-item" key={i}>
+          <th className="open-day">{days[i]}:</th>
+          <td className="open-time">{time[1]}</td>
+        </tr>
+      );
+    });
+    // }
   }
   toggle = () => {
-    // console.log("clicked");
     this.setState({
       readMore: !this.state.readMore
     });
@@ -29,7 +33,12 @@ class OpenHours extends Component {
   render() {
     return (
       <div className="hours">
-        <ul>{this.renderHours()}</ul>
+        {this.props.expand && (
+          <div>
+            {/* <span>Store Hours</span> */}
+            <table className="hours-list">{this.renderHours()}</table>
+          </div>
+        )}
       </div>
     );
   }

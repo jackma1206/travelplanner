@@ -57,6 +57,7 @@
     padding: 15px;
     border-bottom: 1px solid #fff;
     color: white;
+    width: 100%;
     &:hover {
       background: $nav-color;
       color: white;
@@ -94,10 +95,7 @@
     box-sizing: border-box;
   }
 }
-.placelist-item {
-  position: relative;
-  width: 100%;
-}
+
 .deletePlace {
   float: right;
   cursor: pointer;
@@ -107,8 +105,69 @@
   }
 }
 
-.infoContent {
+.place-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hourclick {
+.infoContent {
+  font-family: "Roboto", "sans-serif";
+  h3 {
+    font-size: 20px;
+    margin: 0;
+    padding: 5px 0 5px 0;
+  }
+  .info-address,
+  .info-site,
+  .info-phone {
+    margin: 2px 0 0;
+  }
+
+  .hours {
+    margin: 7px 0;
+    font-size: 12px;
+
+    span {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+  .more-button {
+    color: #5c9ee5;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .info-site {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+table,
+th,
+tr,
+td {
+  padding: 0;
+  margin: 0;
+  border-style: none;
+  border-bottom: 0;
+  border-collapse: collapse;
+  border: 0;
+}
+
+th {
+  text-align: right;
+}
+
+table {
+  margin-left: -18px;
+}
+
+td {
+  padding-left: 10px;
 }

@@ -2,7 +2,8 @@ import {
   GET_TRIPS,
   FETCH_TRIP,
   UPDATE_TODO,
-  UPDATE_TRIP
+  UPDATE_TRIP,
+  GET_FAVE
 } from "../actions/types";
 
 export default function(state = [], action) {
@@ -14,6 +15,8 @@ export default function(state = [], action) {
     case UPDATE_TODO:
       return action.payload;
     case UPDATE_TRIP:
+      return action.payload;
+    case GET_FAVE:
       return action.payload;
     default:
       return state;

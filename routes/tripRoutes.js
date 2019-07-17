@@ -174,6 +174,11 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
-};
+  //get all fave trips
+  app.get("/api/getFaveTrips", async (req, res) => {
+    const tripList = req.user.trips;
 
-//add to fave trip
+    const trip = await Trip.find({ _id: { $in: tripList } });
+    res.send(trip);
+  });
+};
