@@ -5,9 +5,7 @@ import Sidebar from "./sidebar/sidebar";
 import * as actions from "../actions";
 import RenderTrip from "./dash/renderTrips";
 import SavedTripCard from "./landing/card";
-
 import Loader from "react-loader-spinner";
-
 import { Collapsible, CollapsibleItem } from "react-materialize";
 
 class Dashboard extends Component {
@@ -19,6 +17,7 @@ class Dashboard extends Component {
       activeTab: 0
     };
   }
+
   async componentDidMount() {
     await this.props.getTrips();
 
@@ -45,6 +44,13 @@ class Dashboard extends Component {
   };
 
   renderTrips() {
+    if (!this.state.trips) {
+      return (
+        <div className="load-spinner">
+          <Loader type="Plane" color="#00BFFF" height="25" width="25" />
+        </div>
+      );
+    }
     return this.state.trips.reverse().map((trip, i) => {
       let href = `/dashboard/trips/${trip._id}`;
       return (
@@ -80,10 +86,12 @@ class Dashboard extends Component {
       case 0:
         return (
           <div className="">
-            <h1>Dashboard</h1>
-            <Collapsible popout className="coll-wrapper">
-              {this.renderTrips()}
-            </Collapsible>
+            <h1>My Trips</h1>
+            <div className="trips-wrapper">
+              <Collapsible popout className="coll-wrapper">
+                {this.renderTrips()}
+              </Collapsible>
+            </div>
           </div>
         );
       case 1:
@@ -103,12 +111,12 @@ class Dashboard extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Sidebar onChange={this.getActiveTab} />
         <div className="dashboard">
           <div className="container">{this.renderDash()}</div>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }

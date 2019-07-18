@@ -7,6 +7,8 @@ import Header from "./Header";
 import Dashboard from "./Dashboard";
 import TripDetails from "./trips/TripDetails";
 import AllTrips from "./AllTrips";
+import Footer from "./Footer";
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
