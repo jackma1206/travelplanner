@@ -1,6 +1,14 @@
 import React from "react";
+import Loader from "react-loader-spinner";
 
 const tripDetail = props => {
+  if (!props.data.fromDe) {
+    return (
+      <div className="load-spinner">
+        <Loader type="Plane" color="#00BFFF" height="25" width="25" />
+      </div>
+    );
+  }
   let fCode = props.data.fromDe.code;
   let fCity = `${props.data.fromDe.city}, ${props.data.fromDe.country}`;
 
@@ -25,7 +33,7 @@ const tripDetail = props => {
     }
   };
   return (
-    <div>
+    <div className="trip-wrapper">
       <div className="destination-wrapper">
         <div className="from">
           <span className="code">{fCode}</span>

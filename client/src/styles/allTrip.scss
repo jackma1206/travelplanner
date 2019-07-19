@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  margin-top: 50px;
+}
+
+.banner {
+  height: 40vh;
+  background-size: cover;
+}
+
+.trip-wrapper {
+  * {
+    color: white;
+  }
+}

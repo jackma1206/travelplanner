@@ -7,7 +7,7 @@ import Header from "./Header";
 import Dashboard from "./Dashboard";
 import TripDetails from "./trips/TripDetails";
 import AllTrips from "./AllTrips";
-import Footer from "./Footer";
+import ViewTrip from "./trips/ViewTrip";
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +24,7 @@ class App extends Component {
             <Route path="/trips/all" exact component={AllTrips} />
             <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/dashboard/trips/:id" exact component={TripDetails} />
+            <Route path="/view/:id" exact component={ViewTrip} />
           </div>
         </BrowserRouter>
       </div>

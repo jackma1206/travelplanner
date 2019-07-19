@@ -53,17 +53,6 @@ class TripEdit extends Component {
   markerClick = (props, marker, e) => {
     let { places } = this.state;
     let temp = places[marker.id];
-
-    // places.forEach(place => {
-    //   if (props.title === place.title) {
-    //     temp = place;
-    //   }
-    // });
-    // let temp = {
-    //   lat: props.position.lat,
-    //   lng: props.position.lng,
-    //   title: props.title
-    // };
     this.showInfo(temp);
   };
 
