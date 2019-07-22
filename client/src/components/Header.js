@@ -21,6 +21,9 @@ class Header extends Component {
   }
 
   renderDropdown() {
+    if (!this.props.auth) {
+      return "loading";
+    }
     const trigger = (
       <Button className="btn dropdown-btn">
         <img

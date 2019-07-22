@@ -1,0 +1,85 @@
+@import "./colors";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  margin-top: 50px;
+}
+
+.banner {
+  height: 40vh;
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 47%;
+  }
+}
+
+.lead {
+  font-family: "Roboto";
+  margin-bottom: 20px;
+  .title {
+    margin-bottom: 0;
+  }
+
+  p {
+    margin-left: 5px;
+    font-size: 16px;
+  }
+  i {
+    margin: 0 5px;
+  }
+
+  .icon-text {
+    font-size: 13px;
+  }
+}
+.map-wrap-one {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 100px;
+}
+
+.map-container-one {
+  width: 100%;
+  height: 600px;
+}
+
+.slider-wrap {
+  background: white;
+  padding: 30px;
+  width: 90%;
+  .slider-item {
+    height: 100px;
+    border: 1px solid black;
+    max-width: 260px;
+    background: white;
+    h2 {
+      font-size: 16px;
+      font-family: "Roboto";
+    }
+  }
+  .row .col {
+    padding: 0;
+  }
+
+  .isActive-one {
+    background: $nav-color;
+    color: white;
+  }
+}
+.slick-slide img {
+  max-width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+.slick-next:before,
+.slick-prev:before {
+  color: #000 !important;
+}

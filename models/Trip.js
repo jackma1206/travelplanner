@@ -27,10 +27,11 @@ const tripSchema = new Schema({
   flightCost: Number,
   numPeople: Number,
   location: { lat: Number, long: Number },
-  dateCreated: { type: Date, default: Date.now },
+  dateCreated: String,
   image: { type: String, default: defPic },
   description: String,
-  _user: { type: Schema.Types.ObjectId, ref: "User" }
+  _user: { type: Schema.Types.ObjectId, ref: "User" },
+  author: String
 });
 
 mongoose.model("trips", tripSchema);

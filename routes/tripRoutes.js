@@ -44,7 +44,7 @@ module.exports = app => {
   app.post("/api/trips/:id", async (req, res) => {
     let id = req.params.id;
     const trip = await Trip.findById(id);
-    console.log(req.body);
+
     trip.thingsToDo.push(req.body);
     try {
       await trip.save();
@@ -139,6 +139,10 @@ module.exports = app => {
     const json = await JSON.parse(response);
     const lat = json.results[0].locations[0].latLng.lat;
     const long = json.results[0].locations[0].latLng.lng;
+    let d = new Date();
+    let dd = d.getDate();
+    let mm = d.getMonth() + 1;
+    let yyyy = d.getFullYear();
 
     const trip = new Trip({
       tripName,
@@ -165,8 +169,10 @@ module.exports = app => {
       location: { lat: lat, long: long },
       thingsToDo: [],
       _user: req.user.id,
-      dateCreated: Date.now()
+      dateCreated: `${mm}/${dd}/${yyyy}`,
+      author: req.user.name
     });
+
     try {
       await trip.save();
       res.send(trip);

@@ -19,15 +19,15 @@ const tripDetail = props => {
     if (window.location.pathname === "/dashboard") {
       return (
         <div className="col s4 right-align icons">
-          <a href="#" className="btn-small">
+          <a href={`/view/${props.href}`} className="btn-small">
             <i className="fas fa-eye" />
           </a>
-          <a href={props.href} className="btn-small">
+          <a href={`/dashboard/trips/${props.href}`} className="btn-small">
             <i className="far fa-edit" />
           </a>
-          <a href="#" className="btn-small">
+          <btn href="#" className="btn-small" style={{ margin: "5px 3px" }}>
             <i className="far fa-trash-alt" />
-          </a>
+          </btn>
         </div>
       );
     }

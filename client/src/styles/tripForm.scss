@@ -147,7 +147,7 @@ textarea.materialize-textarea {
   transform: translate(-50%, -50%);
   background: white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.7);
-  z-index: 5;
+  z-index: 3;
 }
 
 .modal-overlay {
@@ -157,6 +157,7 @@ textarea.materialize-textarea {
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 5;
 }
 
 .modal-header {
@@ -176,4 +177,7 @@ textarea.materialize-textarea {
     width: 10px;
     height: 10px;
   }
+}
+.ReactModal__Overlay--after-open {
+  z-index: 4;
 }

@@ -8,7 +8,8 @@ const toDoSchema = new mongoose.Schema({
   icon: String,
   site: String,
   hours: [],
-  phone: String
+  phone: String,
+  picture: String
 });
 
 module.exports = toDoSchema;

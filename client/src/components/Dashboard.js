@@ -52,7 +52,7 @@ class Dashboard extends Component {
       );
     }
     return this.state.trips.reverse().map((trip, i) => {
-      let href = `/dashboard/trips/${trip._id}`;
+      let href = trip._id;
       return (
         <CollapsibleItem key={i} className="coll-item" header={trip.tripName}>
           <RenderTrip data={trip} href={href} addTrip={this.updateList} />

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Map, Marker, InfoWindow, GoogleApiWrapper } from "google-maps-react";
-import "../../styles/tripDetail.scss";
+
 import OpenHours from "./OpenHours";
 
-class MapContainer extends Component {
+class ViewTripMapContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -15,56 +15,9 @@ class MapContainer extends Component {
       activeMarker: {},
       selectedPlace: {},
       selectedData: [],
-      expand: false,
-      value: ""
+      expand: false
     };
   }
-
-  setValue = event => {
-    this.setState({
-      value: event.target.value
-    });
-  };
-  setupAutocomplete = (mapProps, map) => {
-    const { google } = mapProps;
-    const input = document.getElementById("autocomplete");
-    this.autocomplete = new google.maps.places.Autocomplete(input, {});
-    this.autocomplete.addListener("place_changed", this.handlePlaceChanged);
-  };
-
-  handlePlaceChanged = () => {
-    const place = this.autocomplete.getPlace();
-    let lat = place.geometry.location.lat();
-    let lng = place.geometry.location.lng();
-    let pic;
-    if (place.photos != undefined) {
-      pic = place.photos[0].getUrl();
-    }
-
-    let hours;
-    if (place.opening_hours !== undefined) {
-      hours = place.opening_hours.weekday_text;
-    }
-
-    let phone = place.formatted_phone_number || "";
-    let site = place.website || "";
-
-    const data = {
-      title: place.name,
-      lat: lat,
-      lng: lng,
-      address: place.formatted_address,
-      icon: place.icon,
-      site: site,
-      hours: hours,
-      phone: phone,
-      picture: pic
-    };
-    this.props.addPlace(data);
-    this.setState({
-      value: ""
-    });
-  };
 
   renderHours() {
     const { hours } = this.props.selectedItem;
@@ -111,15 +64,14 @@ class MapContainer extends Component {
     const center = this.props.center;
 
     return (
-      <div className="">
-        <div className="map-container">
+      <>
+        <div className="map-container-one">
           <Map
             google={google}
             style={style}
-            className={"map"}
+            className={"ViewTripMap"}
             zoom={this.props.zoom}
             initialCenter={center}
-            onReady={this.setupAutocomplete}
             onClick={this.props.onMapClick}
           >
             {data.map((item, i) => (
@@ -174,21 +126,11 @@ class MapContainer extends Component {
             </InfoWindow>
           </Map>
         </div>
-        <div className="searchbox">
-          <input
-            type="text"
-            id="autocomplete"
-            ref={this.autocompleteInput}
-            placeholder="Enter a location to add to the map"
-            value={this.state.value}
-            onChange={this.setValue}
-          />
-        </div>
-      </div>
+      </>
     );
   }
 }
 
 export default GoogleApiWrapper({
   apiKey: `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`
-})(MapContainer);
+})(ViewTripMapContainer);
