@@ -36,7 +36,7 @@ class Header extends Component {
           alt="profile"
         />
         <span>
-          {this.props.auth.name} <i className="fas fa-bars" />
+          <i className="fas fa-bars" />
         </span>
       </Button>
     );

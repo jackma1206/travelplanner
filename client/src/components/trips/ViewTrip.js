@@ -28,7 +28,6 @@ class ViewTrip extends Component {
   }
 
   renderLeadInfo() {
-    console.log(this.state);
     if (!this.state.trip) {
       return (
         <div className="load-spinner">
