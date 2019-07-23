@@ -16,27 +16,28 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    object-position: 50% 47%;
   }
 }
 
 .lead {
   font-family: "Roboto";
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-align: center;
   .title {
     margin-bottom: 0;
+    font-weight: 300;
   }
 
   p {
     margin-left: 5px;
-    font-size: 16px;
+    font-size: 18px;
   }
   i {
     margin: 0 5px;
   }
 
   .icon-text {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 .map-wrap-one {

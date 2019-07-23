@@ -30,12 +30,13 @@ class Header extends Component {
     }
     const trigger = (
       <Button className="btn dropdown-btn">
-        <img
+        {/* <img
           className="profile-pic"
           src={this.props.auth.picture}
           alt="profile"
-        />
+        /> */}
         <span>
+          {this.props.auth.name}
           <i className="fas fa-bars" />
         </span>
       </Button>

@@ -51,13 +51,8 @@ class ViewTrip extends Component {
         tLength = thingsToDo.length;
         toDest = toDe;
       }
-
-      console.log(toDe);
       return (
         <>
-          <div className="banner">
-            <img src={image} className="z-depth-3" alt="banner" />
-          </div>
           <div className="lead">
             <h3 className="title">{tripName}</h3>
             <p>{description}</p>
@@ -165,10 +160,15 @@ class ViewTrip extends Component {
     console.log(this.state.trip);
 
     return (
-      <div className="container wrapper">
-        {this.renderLeadInfo()}
-        {this.renderMap()}
-      </div>
+      <>
+        <div className="banner">
+          <img src={this.state.trip.image} className="z-depth-3" alt="banner" />
+        </div>
+        <div className="container wrapper">
+          {this.renderLeadInfo()}
+          {this.renderMap()}
+        </div>
+      </>
     );
   }
 }
