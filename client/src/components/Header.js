@@ -25,7 +25,8 @@ class Header extends Component {
   }
 
   renderDropdown() {
-    if (this.props.auth === null) {
+    console.log(this.props.auth);
+    if (!this.props.auth) {
       return "loading";
     }
     const trigger = (
