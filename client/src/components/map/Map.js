@@ -37,7 +37,7 @@ class MapContainer extends Component {
     let lat = place.geometry.location.lat();
     let lng = place.geometry.location.lng();
     let pic;
-    if (place.photos != undefined) {
+    if (place.photos !== undefined) {
       pic = place.photos[0].getUrl();
     }
 

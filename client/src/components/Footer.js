@@ -16,7 +16,7 @@ const Footer = props => {
             </a>
           </li>
           <li>
-            <a className="footer-icon" href="#">
+            <a className="footer-icon" href="github.com/jackma1206">
               <i className="fab fa-github" />
             </a>
           </li>

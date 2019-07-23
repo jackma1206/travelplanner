@@ -5,6 +5,10 @@ import { Dropdown, Divider, Button } from "react-materialize";
 import "../styles/header.scss";
 
 class Header extends Component {
+  state = {
+    profile: {}
+  };
+
   renderContent() {
     switch (this.props.auth) {
       case null:
@@ -21,7 +25,7 @@ class Header extends Component {
   }
 
   renderDropdown() {
-    if (!this.props.auth) {
+    if (this.props.auth === null) {
       return "loading";
     }
     const trigger = (
@@ -40,7 +44,7 @@ class Header extends Component {
     return (
       <Dropdown trigger={trigger} options={options}>
         <a href="/dashboard">Dashboard</a>
-        <a href="#">Preferences</a>
+        {/* <a href="#">Preferences</a> */}
         <Divider />
         <a href="/api/logout">Logout</a>
       </Dropdown>

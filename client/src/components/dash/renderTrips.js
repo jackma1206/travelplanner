@@ -25,9 +25,9 @@ const tripDetail = props => {
           <a href={`/dashboard/trips/${props.href}`} className="btn-small">
             <i className="far fa-edit" />
           </a>
-          <btn href="#" className="btn-small" style={{ margin: "5px 3px" }}>
+          <button href="#" className="btn-small" style={{ margin: "5px 3px" }}>
             <i className="far fa-trash-alt" />
-          </btn>
+          </button>
         </div>
       );
     }

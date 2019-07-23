@@ -49,7 +49,7 @@ class ViewTripPlaceList extends Component {
                 >
                   <div className="row">
                     <div className="col s6">
-                      <img src={pic} className="place-pic" />
+                      <img src={pic} className="place-pic" alt="Header" />
                     </div>
                     <div className="col s6">
                       <h2 className="slider-title">{place.title}</h2>
